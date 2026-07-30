@@ -371,24 +371,25 @@
     box-shadow: none;
   }
 
-  @media (max-width: 768px) {
-  /* 1. 调整外层边距和按钮大小，适应小屏幕点击 */
+@media (max-width: 768px) {
+  /* 1. 词汇表（表格）强制堆叠自适应 */
+  table, tbody, tr, td, th { display: block; width: 100% !important; box-sizing: border-box; }
+  .word-col, .meaning-col { width: 100% !important; display: block !important; }
+  tr { margin-bottom: 15px; border: 2px solid var(--accent2); border-radius: 12px; }
+  td { padding: 12px 15px; border-bottom: none !important; }
+  .num-col { display: none !important; } /* 隐藏序号，节省空间 */
+  .word-col { background: #FFFDF9; border-bottom: 1px dashed var(--accent2) !important; }
+  
+  /* 2. 外层边距和按钮大小 */
   .card { padding: 15px; }
   .tab-btn { padding: 8px 16px; font-size: 0.95rem; }
   
-  /* 2. 将横向表格改为上下堆叠的卡片布局，防止单词和释义被挤压变形 */
-  table, tbody, tr, td { display: block; width: 100%; }
-  tr { margin-bottom: 15px; border: 2px solid var(--accent2); border-radius: 12px; }
-  td { padding: 12px 15px; border-bottom: none !important; }
-  .num-col { display: none; } /* 手机端隐藏序号，节省横向空间 */
-  .word-col { background: #FFFDF9; border-bottom: 1px dashed var(--accent2) !important; }
-  
-  /* 3. 缩小翻转记忆卡片的高度和字号 */
+  /* 3. 翻转记忆卡片 */
   .flashcard-scene { height: 380px; }
   .fc-word { font-size: 1.8rem; }
   .card-face { padding: 20px; }
   
-  /* 4. 防止底部翻页按钮换行错位 */
+  /* 4. 底部按钮防止错位 */
   .nav-controls { flex-wrap: wrap; }
   .nav-btn { padding: 10px 20px; font-size: 16px; }
 }
