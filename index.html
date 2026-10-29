@@ -1362,10 +1362,10 @@ pastTenseQuestions.splice(33, 1,
 
 const subjunctiveQuestions = [
   // 愿望
-  { id: 1, cat: "愿望", before: "Espero que", after: "muy bien.", hint: "estar", answers: ["estés", "estéis", "esté"], cn: "希望你一切都好。", exp: "esperar que + 虚拟式：estar → estés（若指您/你们，填 esté / estéis 亦正确）" },
-  { id: 2, cat: "愿望", before: "Espero que", after: "un buen viaje.", hint: "tener", answers: ["tengas", "tengáis", "tenga"], cn: "希望你旅途愉快。", exp: "tener → tengas（兼容 usted tenga / vosotros tengáis）" },
+  { id: 1, cat: "愿望", before: "Espero que", after: "muy bien.", hint: "estar", answers: ["estés"], cn: "希望你一切都好。", exp: "esperar que + 虚拟式：estar → estés（若指您/你们，填 esté / estéis）" },
+  { id: 2, cat: "愿望", before: "Espero que", after: "un buen viaje.", hint: "tener", answers: ["tengas"], cn: "希望你旅途愉快。", exp: "tener → tengas（注意 usted tenga / vosotros tengáis）" },
   { id: 3, cat: "愿望", before: "Deseo que", after: "de tu estancia.", hint: "disfrutar", answers: ["disfrutes"], cn: "我祝愿你逗留/居住愉快。", exp: "句中有物主形容词 tu，确定主语为 tú：disfrutar → disfrutes" },
-  { id: 4, cat: "愿望", before: "¡Que lo", after: "muy bien!", hint: "pasar", answers: ["pases", "paséis", "pase"], cn: "祝你玩得开心！（独立愿望句式）", exp: "独立祝愿句 ¡Que + 虚拟式!：pasar → pases（兼容 paséis / pase）" },
+  { id: 4, cat: "愿望", before: "¡Que lo", after: "muy bien!", hint: "pasar", answers: ["pases"], cn: "祝你玩得开心！（独立愿望句式）", exp: "独立祝愿句 ¡Que + 虚拟式!：pasar → pases" },
   { id: 5, cat: "愿望", before: "¡Ojalá mañana no", after: "durante nuestra excursión!", hint: "llover", answers: ["llueva"], cn: "但愿明天我们郊游时不要下雨！", exp: "ojalá 必接虚拟式，llover (o→ue) → llueva" },
   { id: 6, cat: "愿望", before: "Mis padres esperan que yo", after: "un buen trabajo pronto.", hint: "conseguir", answers: ["consiga"], cn: "我父母希望我很快找到一份好工作。", exp: "conseguir (yo consigo) →虚拟式词根 consig- → yo consiga" },
 
@@ -1378,12 +1378,12 @@ const subjunctiveQuestions = [
   // 意愿与偏好
   { id: 11, cat: "意愿与偏好", before: "Quiero que te", after: "como en tu propia casa.", hint: "sentirse", answers: ["sientas", "te sientas"], cn: "我想让你感觉像在自己家一样。", exp: "句中已有 te，sentir (e→ie) → sientas" },
   { id: 12, cat: "意愿与偏好", before: "No quiero que te", after: "por la limpieza final.", hint: "preocuparse", answers: ["preocupes", "te preocupes"], cn: "我不想让你为最后的打扫卫生而担心。", exp: "preocupar (tú) → preocupes" },
-  { id: 13, cat: "意愿与偏好", before: "Prefiero que", after: "en el garaje.", hint: "aparcar", answers: ["aparques", "aparquéis", "aparque"], cn: "我更希望你把车停在车库里。", exp: "-car 动词发生 c→qu 正字法变化：aparques（兼容 aparquéis / aparque）" },
+  { id: 13, cat: "意愿与偏好", before: "Prefiero que", after: "en el garaje.", hint: "aparcar", answers: ["aparques"], cn: "我更希望你把车停在车库里。", exp: "-car 动词发生 c→qu 正字法变化：aparques（你们/您 变位 aparquéis / aparque）" },
   { id: 14, cat: "意愿与偏好", before: "Queremos que nuestros hijos", after: "idiomas extranjeros.", hint: "aprender", answers: ["aprendan"], cn: "我们希望我们的孩子学习外语。", exp: "nuestros hijos (ellos) → aprendan" },
 
   // 请求
-  { id: 15, cat: "请求", before: "Te pido que no", after: "mucho ruido por la noche.", hint: "hacer", answers: ["hagas", "hagáis"], cn: "我请求你晚上不要发出太大噪音。", exp: "由 Te 可知主语为 tú，hacer (hago) → hagas" },
-  { id: 16, cat: "请求", before: "Te ruego que", after: "las plantas.", hint: "cuidar", answers: ["cuides", "cuidéis"], cn: "我拜托你照料好那些植物。", exp: "rogar que + 虚拟式：cuidar (tú) → cuides" },
+  { id: 15, cat: "请求", before: "Te pido que no", after: "mucho ruido por la noche.", hint: "hacer", answers: ["hagas"], cn: "我请求你晚上不要发出太大噪音。", exp: "由 Te 可知主语为 tú，hacer (hago) → hagas" },
+  { id: 16, cat: "请求", before: "Te ruego que", after: "las plantas.", hint: "cuidar", answers: ["cuides"], cn: "我拜托你照料好那些植物。", exp: "rogar que + 虚拟式：cuidar (tú) → cuides" },
   { id: 17, cat: "请求", before: "El jefe nos pide que", after: "el informe antes del viernes.", hint: "entregar", answers: ["entreguemos"], cn: "老板要求我们在周五前提交报告。", exp: "由 nos 可知主语为 nosotros，-gar 发生 g→gu 变化：entreguemos" },
   { id: 18, cat: "请求", before: "Le pido a usted que me", after: "un correo electrónico con los datos.", hint: "enviar", answers: ["envíe"], cn: "我请求您给我发一封包含数据的电子邮件。", exp: "enviar 在虚拟式单数与第三人称复数重音落在 i 上：usted envíe" },
   { id: 19, cat: "请求", before: "Les rogamos a los pasajeros que", after: "en sus asientos.", hint: "permanecer", answers: ["permanezcan"], cn: "我们恳请乘客们留在自己的座位上。", exp: "permanecer (yo permanezco) → ellos permanezcan" },
