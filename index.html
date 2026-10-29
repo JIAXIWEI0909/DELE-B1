@@ -1,0 +1,1984 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<title>DELE B1 备考</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<!-- 引入 Tailwind CSS 并关闭 preflight 重置，确保原有暖橙色定制样式 100% 完美呈现 -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    corePlugins: {
+      preflight: false
+    }
+  };
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Nunito:wght@400;700;800;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FFF7ED;
+    --ink: #333333;
+    --accent: #FFA94D;
+    --accent2: #FFD8A8;
+    --card: #ffffff;
+    --hover: #FFF0D4;
+    --flip-bg: #e65100;
+    --flip-dark: #d35400;
+    --ok-bg: #ECFDF5;
+    --ok-border: #34D399;
+    --ok-ink: #065F46;
+    --err-bg: #FEF2F2;
+    --err-border: #F87171;
+    --err-ink: #991B1B;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: 'Nunito', 'Poppins', 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    padding-bottom: 70px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* --- 顶部标题栏 --- */
+  header {
+    padding: 28px 20px;
+    text-align: center;
+    background: #fff0da;
+    border-bottom: 5px solid var(--accent);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+
+  h1 {
+    margin: 0;
+    font-weight: 900;
+    color: #e65100;
+    font-size: clamp(26px, 5vw, 40px);
+    letter-spacing: 1px;
+  }
+
+  header p {
+    color: #d35400;
+    font-weight: 700;
+    margin: 10px 0 0 0;
+    font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+  }
+
+  .container {
+    max-width: 1020px;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+
+  /* --- 顶部四大模块导航 --- */
+  .nav-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 26px 0;
+  }
+
+  .tab-btn {
+    border: 2px solid var(--accent);
+    padding: 11px 24px;
+    background: #fff;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 800;
+    font-size: 1.05rem;
+    font-family: inherit;
+    transition: all 0.2s ease;
+    color: var(--ink);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  }
+
+  .tab-btn:hover { background: var(--hover); transform: translateY(-2px); }
+
+  .tab-btn.active {
+    background: var(--accent);
+    color: white;
+    transform: scale(1.04);
+    box-shadow: 0 4px 12px rgba(255, 169, 77, 0.45);
+  }
+
+  .section-content { display: none; animation: fadeIn 0.35s ease-out; }
+  .section-content.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card {
+    background: var(--card);
+    border: 2px solid var(--accent2);
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    margin-bottom: 30px;
+  }
+
+  /* --- 词汇搜索栏样式 --- */
+  .vocab-search-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 20px;
+    background: #FFFDF9;
+    border: 2px solid var(--accent2);
+    padding: 14px 18px;
+    border-radius: 16px;
+  }
+
+  .search-input-wrap {
+    position: relative;
+    flex: 1 1 280px;
+    display: flex;
+    align-items: center;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 14px;
+    color: #e65100;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+  }
+
+  .vocab-search-input {
+    width: 100%;
+    padding: 11px 40px 11px 42px;
+    border: 2px solid var(--accent2);
+    border-radius: 999px;
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--ink);
+    background: #fff;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .vocab-search-input:focus {
+    border-color: #e65100;
+    box-shadow: 0 0 0 3px rgba(255, 169, 77, 0.25);
+  }
+
+  .search-clear-btn {
+    position: absolute;
+    right: 10px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: none;
+    background: var(--accent2);
+    color: #e65100;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+  }
+
+  .search-clear-btn:hover {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .vocab-count-badge {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #d35400;
+    background: #FFF0D4;
+    padding: 6px 14px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  .empty-search-box {
+    text-align: center;
+    padding: 45px 20px;
+    background: #FFFDF9;
+    border: 2px dashed var(--accent2);
+    border-radius: 16px;
+    color: #777;
+  }
+
+  /* --- 词汇表格样式 --- */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid var(--accent2);
+  }
+
+  th, td {
+    padding: 18px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--accent2);
+  }
+
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) { background-color: #FFFDF9; }
+  tr:hover { background-color: var(--hover); }
+
+  .num-col {
+    font-weight: 900;
+    color: #d35400;
+    width: 6%;
+    vertical-align: top;
+    font-size: 1.05rem;
+  }
+
+  /* 手机端专属序号徽章（桌面端隐藏，手机端显示在词条旁） */
+  .mobile-num-badge {
+    display: none;
+  }
+
+  .word-col {
+    font-weight: 900;
+    font-size: 1.2rem;
+    color: #e65100;
+    width: 26%;
+    font-family: 'Nunito', sans-serif;
+    vertical-align: top;
+  }
+
+  .base-verb {
+    font-size: 0.85rem;
+    color: white;
+    background-color: var(--accent);
+    padding: 3px 10px;
+    border-radius: 12px;
+    display: inline-block;
+    margin-top: 8px;
+    font-weight: 700;
+  }
+
+  .meaning-col { width: 68%; }
+  .meaning-col strong { color: var(--ink); font-size: 1.15rem; }
+  .meaning-col p.context { margin: 8px 0 12px 0; color: #555; font-size: 1rem; }
+
+  .meaning-col p.example {
+    margin: 0;
+    color: #d35400;
+    font-size: 0.95rem;
+    font-style: italic;
+    background: #FFF7ED;
+    padding: 10px 15px;
+    border-left: 4px solid var(--accent2);
+    border-radius: 0 8px 8px 0;
+  }
+
+  /* --- 翻转记忆卡片 CSS --- */
+  .flashcard-scene {
+    width: 100%;
+    max-width: 760px;
+    height: 490px;
+    margin: 20px auto;
+    perspective: 1500px;
+    cursor: pointer;
+  }
+
+  .flashcard {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transform-style: preserve-3d;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+  }
+
+  .flashcard.is-flipped {
+    transform: rotateY(180deg);
+  }
+
+  .card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    padding: 28px 36px;
+    text-align: center;
+    border: 5px solid var(--accent);
+  }
+
+  .card-front { background: white; color: var(--ink); }
+  .card-back {
+    background: var(--flip-bg);
+    color: white;
+    transform: rotateY(180deg);
+    border-color: #d35400;
+    justify-content: flex-start;
+    overflow-y: auto;
+  }
+
+  .word-header-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: auto;
+    margin-bottom: 12px;
+  }
+
+  .fc-word {
+    font-size: 2.3rem;
+    font-weight: 900;
+    color: #e65100;
+    font-family: 'Nunito', sans-serif;
+    line-height: 1.25;
+  }
+
+  .card-front .base-note {
+    font-size: 1.05rem;
+    color: #d35400;
+    font-weight: 700;
+    background: #FFF0D4;
+    padding: 5px 15px;
+    border-radius: 20px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+  }
+
+  .fc-hint {
+    font-size: 14px;
+    color: #999;
+    margin-top: auto;
+    font-style: italic;
+  }
+
+  .card-back h3 {
+    margin-top: 6px;
+    color: #FFD8A8;
+    font-size: 1.65rem;
+    margin-bottom: 12px;
+    font-weight: 900;
+    font-family: 'Nunito', sans-serif;
+  }
+
+  .card-back p.fc-context {
+    font-size: 1.02rem;
+    line-height: 1.6;
+    color: white;
+    font-weight: 500;
+    margin: 0 0 16px 0;
+    text-align: left;
+    width: 100%;
+  }
+
+  .card-back p.fc-example {
+    font-size: 1rem;
+    line-height: 1.55;
+    color: #FFF0D4;
+    font-style: italic;
+    background: rgba(0,0,0,0.18);
+    padding: 14px;
+    border-radius: 10px;
+    border-left: 4px solid #FFD8A8;
+    width: 100%;
+    margin-top: auto;
+    margin-bottom: 4px;
+    text-align: left;
+  }
+
+  .mode-controls {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+  }
+
+  .mode-btn {
+    background: #FFF7ED;
+    border: 2px solid var(--accent);
+    color: #e65100;
+    padding: 8px 20px;
+    border-radius: 18px;
+    cursor: pointer;
+    font-weight: 800;
+    font-family: inherit;
+    font-size: 0.98rem;
+    transition: 0.2s;
+  }
+
+  .mode-btn:hover { background: var(--hover); }
+
+  .mode-btn.active {
+    background: var(--accent);
+    color: white;
+  }
+
+  .nav-controls {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 15px;
+  }
+
+  .nav-btn {
+    background: white;
+    color: #e65100;
+    border: 2px solid var(--accent);
+    padding: 11px 28px;
+    border-radius: 50px;
+    font-size: 17px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: 0.2s;
+    font-family: 'Nunito', sans-serif;
+  }
+
+  .nav-btn:hover { transform: translateY(-2px); background: var(--hover); }
+  .flip-btn { background: #e65100; color: white; border-color: #e65100; }
+  .flip-btn:hover { background: #d35400; color: white; }
+
+  .progress-info {
+    text-align: center;
+    margin-top: 18px;
+    font-size: 1.15rem;
+    color: #888;
+    font-weight: 800;
+  }
+
+  /* --- 动词时态练习模块专属样式 --- */
+  .verb-subtabs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-bottom: 22px;
+  }
+
+  .verb-subtab-btn {
+    border: 2px solid var(--accent2);
+    background: #FFFDF9;
+    border-radius: 16px;
+    padding: 14px 18px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s ease;
+    font-family: inherit;
+  }
+
+  .verb-subtab-btn:hover {
+    background: var(--hover);
+    border-color: var(--accent);
+  }
+
+  .verb-subtab-btn.active {
+    background: linear-gradient(135deg, #e65100, #ff8c24);
+    border-color: #e65100;
+    color: #fff;
+    box-shadow: 0 6px 16px rgba(230, 81, 0, 0.25);
+  }
+
+  .verb-subtab-title {
+    font-size: 1.1rem;
+    font-weight: 900;
+    display: block;
+    margin-bottom: 4px;
+    color: inherit;
+  }
+
+  .verb-subtab-desc {
+    font-size: 0.86rem;
+    opacity: 0.88;
+    display: block;
+    color: inherit;
+  }
+
+  /* 分类筛选药丸 */
+  .category-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+
+  .cat-pill {
+    border: 1.5px solid var(--accent2);
+    background: #fff;
+    color: #7c3f00;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.18s;
+  }
+
+  .cat-pill:hover {
+    background: var(--hover);
+    border-color: var(--accent);
+  }
+
+  .cat-pill.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  /* 进度统计与重音符号吸顶工具栏 */
+  .verb-sticky-toolbar {
+    position: sticky;
+    top: 8px;
+    z-index: 30;
+    background: rgba(255, 250, 242, 0.96);
+    backdrop-filter: blur(8px);
+    border: 2px solid var(--accent);
+    border-radius: 16px;
+    padding: 12px 16px;
+    margin-bottom: 22px;
+    box-shadow: 0 6px 18px rgba(230, 81, 0, 0.1);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .accent-helper-group {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .accent-label {
+    font-size: 0.88rem;
+    font-weight: 800;
+    color: #d35400;
+    margin-right: 4px;
+  }
+
+  .accent-key {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    border: 2px solid var(--accent2);
+    background: #fff;
+    color: #e65100;
+    font-weight: 900;
+    font-size: 1.05rem;
+    font-family: 'Nunito', sans-serif;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+  }
+
+  .accent-key:hover, .accent-key:active {
+    background: #e65100;
+    color: #fff;
+    border-color: #e65100;
+    transform: translateY(-1px);
+  }
+
+  .stats-pill-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-size: 0.9rem;
+    font-weight: 800;
+  }
+
+  .stat-tag {
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: #FFF0D4;
+    color: #b44300;
+  }
+
+  .stat-tag.accuracy {
+    background: #ECFDF5;
+    color: #065F46;
+    border: 1px solid #A7F3D0;
+  }
+
+  /* 批量操作按钮组 */
+  .batch-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 16px 0;
+  }
+
+  .action-btn {
+    border: 2px solid var(--accent);
+    background: #fff;
+    color: #e65100;
+    padding: 9px 18px;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 0.94rem;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+  }
+
+  .action-btn:hover {
+    background: var(--hover);
+    transform: translateY(-1px);
+  }
+
+  .action-btn.primary {
+    background: #e65100;
+    border-color: #e65100;
+    color: #fff;
+  }
+
+  .action-btn.primary:hover {
+    background: #d35400;
+  }
+
+  /* 单道动词练习卡片 */
+  .verb-q-card {
+    background: #FFFDF9;
+    border: 2px solid var(--accent2);
+    border-radius: 16px;
+    padding: 18px 20px;
+    margin-bottom: 16px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .verb-q-card.is-correct {
+    border-color: var(--ok-border);
+    background: #FAFFFD;
+  }
+
+  .verb-q-card.is-wrong {
+    border-color: var(--err-border);
+    background: #FFFBFB;
+  }
+
+  .verb-q-card.is-revealed {
+    border-color: var(--accent);
+    background: #FFFBF4;
+  }
+
+  .verb-q-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+
+  .verb-q-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #e65100;
+    color: #fff;
+    font-weight: 900;
+    font-size: 0.88rem;
+    padding: 3px 10px;
+    border-radius: 999px;
+  }
+
+  .verb-q-cat {
+    font-size: 0.82rem;
+    font-weight: 800;
+    color: #b44300;
+    background: #FFF0D4;
+    padding: 3px 11px;
+    border-radius: 999px;
+  }
+
+  .verb-sentence {
+    font-size: 1.16rem;
+    font-weight: 700;
+    color: #222;
+    line-height: 2;
+    margin-bottom: 8px;
+  }
+
+  .verb-inline-input {
+    display: inline-block;
+    width: 175px;
+    max-width: 65vw;
+    padding: 4px 12px;
+    margin: 0 5px;
+    font-size: 1.1rem;
+    font-weight: 800;
+    font-family: 'Nunito', sans-serif;
+    color: #e65100;
+    background: #fff;
+    border: 2px solid var(--accent);
+    border-radius: 10px;
+    text-align: center;
+    outline: none;
+    transition: all 0.2s;
+  }
+
+  .verb-inline-input:focus {
+    border-color: #e65100;
+    box-shadow: 0 0 0 3px rgba(230, 81, 0, 0.2);
+    background: #FFFDF9;
+  }
+
+  .verb-inline-input.input-ok {
+    border-color: #10B981;
+    color: #047857;
+    background: #ECFDF5;
+  }
+
+  .verb-inline-input.input-err {
+    border-color: #EF4444;
+    color: #B91C1C;
+    background: #FEF2F2;
+  }
+
+  .verb-hint-badge {
+    display: inline-block;
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #fff;
+    background: var(--accent);
+    padding: 2px 11px;
+    border-radius: 999px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+
+  .verb-cn-trans {
+    font-size: 0.96rem;
+    color: #666;
+    margin: 4px 0 12px 0;
+  }
+
+  .verb-q-footer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .mini-btn {
+    padding: 6px 15px;
+    border-radius: 999px;
+    font-size: 0.88rem;
+    font-weight: 800;
+    cursor: pointer;
+    font-family: inherit;
+    border: 1.5px solid var(--accent);
+    background: #fff;
+    color: #e65100;
+    transition: all 0.18s;
+  }
+
+  .mini-btn:hover { background: var(--hover); }
+
+  .mini-btn.check {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .mini-btn.check:hover {
+    background: #e65100;
+    border-color: #e65100;
+  }
+
+  .verb-feedback {
+    margin-top: 12px;
+    padding: 12px 15px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    display: none;
+  }
+
+  .verb-feedback.show { display: block; }
+
+  .verb-feedback.fb-ok {
+    background: var(--ok-bg);
+    border-left: 4px solid #10B981;
+    color: var(--ok-ink);
+  }
+
+  .verb-feedback.fb-err {
+    background: var(--err-bg);
+    border-left: 4px solid #EF4444;
+    color: var(--err-ink);
+  }
+
+  .verb-feedback.fb-reveal {
+    background: #FFF7ED;
+    border-left: 4px solid #e65100;
+    color: #7c2d12;
+  }
+
+  /* --- 听力填空 CSS --- */
+  .cloze-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 18px;
+    margin-bottom: 18px;
+    border-bottom: 2px dashed var(--accent2);
+  }
+
+  .cloze-text {
+    font-size: 1.22rem;
+    line-height: 2.2;
+    padding: 6px;
+    color: #444;
+  }
+
+  .cloze-text p {
+    margin-bottom: 20px;
+  }
+
+  .blank-word {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 90px;
+    padding: 2px 10px;
+    margin: 0 4px;
+    background-color: var(--accent2);
+    color: transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 800;
+    transition: all 0.25s ease;
+    border: 2px solid transparent;
+    user-select: none;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+  }
+
+  .blank-word:hover {
+    background-color: var(--accent);
+  }
+
+  .blank-word.revealed {
+    background-color: transparent;
+    color: #e65100;
+    border-bottom: 3px solid #e65100;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  /* --- 响应式移动端适配 --- */
+  @media (max-width: 768px) {
+    /* 1. 词汇表卡片化堆叠布局，并优雅展示序号徽章（修复原版手机端无序号 Bug） */
+    table { border: none; background: transparent; }
+    table, tbody, tr, td, th { display: block; width: 100% !important; box-sizing: border-box; }
+    .num-col { display: none !important; }
+    .mobile-num-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #e65100;
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 900;
+      padding: 2px 10px;
+      border-radius: 999px;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+    .word-col, .meaning-col { width: 100% !important; display: block !important; }
+    tr {
+      margin-bottom: 16px;
+      border: 2px solid var(--accent2);
+      border-radius: 14px;
+      background: #fff !important;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    }
+    td { padding: 13px 16px; border-bottom: none !important; }
+    .word-col {
+      background: #FFFDF9;
+      border-bottom: 1px dashed var(--accent2) !important;
+    }
+
+    /* 2. 外层边距和按钮自适应 */
+    .card { padding: 16px; }
+    .nav-tabs { gap: 8px; margin: 18px 0; }
+    .tab-btn { padding: 9px 15px; font-size: 0.94rem; }
+
+    /* 3. 翻转记忆卡片 */
+    .flashcard-scene { height: 410px; }
+    .fc-word { font-size: 1.75rem; }
+    .card-face { padding: 20px; }
+    .card-back h3 { font-size: 1.35rem; }
+
+    /* 4. 动词练习子标签自适应 */
+    .verb-subtabs { grid-template-columns: 1fr; gap: 10px; }
+    .verb-sentence { font-size: 1.05rem; line-height: 1.9; }
+    .verb-inline-input { width: 148px; font-size: 1rem; }
+    .accent-key { width: 32px; height: 32px; font-size: 1rem; }
+
+    /* 5. 底部按钮防止错位 */
+    .nav-controls { flex-wrap: wrap; gap: 10px; }
+    .nav-btn { padding: 10px 20px; font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>DELE B1 备考</h1>
+  <p>大纲高频词汇 | 翻卡记忆 | 动词时态练习 | 听力填空</p>
+</header>
+
+<div class="container">
+  <!-- 顶部导航栏：四大核心模块 -->
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="switchTab('list', this)">大纲高频词汇表</button>
+    <button class="tab-btn" onclick="switchTab('flashcards', this)">翻卡记忆</button>
+    <button class="tab-btn" onclick="switchTab('verbs', this)">动词时态练习</button>
+    <button class="tab-btn" onclick="switchTab('exercise', this)">听力填空</button>
+  </div>
+
+  <!-- 模块一：大纲高频词汇表（支持忽略重音实时搜索 + 手机端序号显示） -->
+  <div id="list" class="section-content active">
+    <div class="card">
+      <div class="vocab-search-bar">
+        <div class="search-input-wrap">
+          <span class="search-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </span>
+          <input
+            type="text"
+            id="vocabSearchInput"
+            class="vocab-search-input"
+            placeholder="搜索西语词条、搭配、中文释义或例句（支持无重音输入如 camion）..."
+            oninput="handleVocabSearch()"
+          />
+          <button type="button" id="vocabClearBtn" class="search-clear-btn" onclick="clearVocabSearch()" title="清空搜索">×</button>
+        </div>
+        <div class="vocab-count-badge" id="vocabCountBadge">显示 122 / 122 条词汇</div>
+      </div>
+
+      <div id="table-container"></div>
+    </div>
+  </div>
+
+  <!-- 模块二：翻卡记忆 -->
+  <div id="flashcards" class="section-content">
+    <div class="card" style="background: transparent; border: none; box-shadow: none; padding: 0;">
+      <div class="mode-controls">
+        <button id="mode-seq" class="mode-btn active" onclick="setMode('sequential')">顺序抽卡</button>
+        <button id="mode-rnd" class="mode-btn" onclick="setMode('random')">随机抽卡</button>
+      </div>
+
+      <div class="flashcard-scene" onclick="flipCard()">
+        <div class="flashcard" id="flashcardElement">
+          <div class="card-face card-front">
+            <div class="word-header-container">
+              <span class="fc-word" id="fc-word">Word</span>
+            </div>
+            <div class="base-note" id="fc-base" style="display: none;"></div>
+            <span class="fc-hint">点击卡片任意位置翻转 (Tap anywhere to flip)</span>
+          </div>
+          <div class="card-face card-back">
+            <h3 id="fc-translation">Translation</h3>
+            <p class="fc-context" id="fc-context">Context</p>
+            <p class="fc-example" id="fc-example">"Example sentence goes here..."</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-controls">
+        <button class="nav-btn" onclick="prevCard(event)">上一张</button>
+        <button class="nav-btn flip-btn" onclick="flipCard(event)">翻转卡片</button>
+        <button class="nav-btn" onclick="nextCard(event)">下一张</button>
+      </div>
+
+      <p class="progress-info">
+        Card <span id="cardCount">1</span> / <span id="totalCards">0</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- 模块三：动词时态练习 -->
+  <div id="verbs" class="section-content">
+    <div class="card">
+      <!-- 子模块切换 -->
+      <div class="verb-subtabs">
+        <button type="button" id="subtab-past" class="verb-subtab-btn active" onclick="switchVerbModule('past')">
+          <span class="verb-subtab-title">过去时态练习</span>
+          <span class="verb-subtab-desc">共 36 题 · 简单过去时与高频不规则动词</span>
+        </button>
+        <button type="button" id="subtab-subj" class="verb-subtab-btn" onclick="switchVerbModule('subj')">
+          <span class="verb-subtab-title">虚拟式练习</span>
+          <span class="verb-subtab-desc">共 33 题 · 愿望 / 建议 / 意愿 / 请求 / 允许禁止 / 情感喜好</span>
+        </button>
+      </div>
+
+      <!-- 分类筛选栏 -->
+      <div id="verbCategoryPills" class="category-pills"></div>
+
+      <!-- 吸顶工具栏：西语特殊字符快捷输入 + 实时做题进度与正确率 -->
+      <div class="verb-sticky-toolbar">
+        <div class="accent-helper-group">
+          <span class="accent-label">西语字母快捷输入：</span>
+          <button type="button" class="accent-key" onmousedown="insertAccent(event, 'á')">á</button>
+          <button type="button" class="accent-key" onmousedown="insertAccent(event, 'é')">é</button>
+          <button type="button" class="accent-key" onmousedown="insertAccent(event, 'í')">í</button>
+          <button type="button" class="accent-key" onmousedown="insertAccent(event, 'ó')">ó</button>
+          <button type="button" class="accent-key" onmousedown="insertAccent(event, 'ú')">ú</button>
+          <button type="button" class="accent-key" onmousedown="insertAccent(event, 'ñ')">ñ</button>
+          <button type="button" class="accent-key" onmousedown="insertAccent(event, 'ü')">ü</button>
+        </div>
+        <div class="stats-pill-group">
+          <span class="stat-tag" id="verbProgressStat">已作答 0 / 32</span>
+          <span class="stat-tag accuracy" id="verbAccuracyStat">正确率：--</span>
+        </div>
+      </div>
+
+      <!-- 顶部批量操作按钮 -->
+      <div class="batch-actions">
+        <button type="button" class="action-btn primary" onclick="checkAllVerbs()">全部核对</button>
+        <button type="button" class="action-btn" onclick="revealAllVerbs()">显示全部答案</button>
+        <button type="button" class="action-btn" onclick="resetCurrentVerbs()">重置本页练习</button>
+      </div>
+
+      <!-- 题目列表容器 -->
+      <div id="verbQuestionsContainer"></div>
+
+      <!-- 底部批量操作按钮 -->
+      <div class="batch-actions" style="justify-content: center; margin-top: 24px;">
+        <button type="button" class="action-btn primary" onclick="checkAllVerbs()">全部核对</button>
+        <button type="button" class="action-btn" onclick="revealAllVerbs()">显示全部答案</button>
+        <button type="button" class="action-btn" onclick="resetCurrentVerbs()">重置本页练习</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 模块四：听力填空 -->
+  <div id="exercise" class="section-content">
+    <div class="card">
+      <div class="cloze-toolbar">
+        <div style="font-weight: 800; color: #d35400; font-size: 1rem;">
+          💡 点击橙色色块可单独显示/隐藏答案（已揭晓 <span id="clozeRevealedCount">0</span> / <span id="clozeTotalCount">34</span> 空）
+        </div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <button type="button" class="mini-btn check" onclick="setAllCloze(true)">全部显示</button>
+          <button type="button" class="mini-btn" onclick="setAllCloze(false)">全部隐藏</button>
+        </div>
+      </div>
+
+      <div class="cloze-text" id="clozeContainer">
+        <p>Me llamo Juli y soy argentina. <span class="blank-word" onclick="toggleBlank(this)">Llevo</span> trece años en España. Vivo con mi <span class="blank-word" onclick="toggleBlank(this)">pareja</span> y mi hijo. Al principio vivíamos en una casa rodante y <span class="blank-word" onclick="toggleBlank(this)">estuvimos</span> tres años <span class="blank-word" onclick="toggleBlank(this)">recorriendo</span> España. Teníamos los mejores paisajes como si fueran el jardín de nuestra casa. Después de ver el país, <span class="blank-word" onclick="toggleBlank(this)">decidimos</span> <span class="blank-word" onclick="toggleBlank(this)">quedarnos</span> en Asturias, en una zona entre las montañas y la costa.</p>
+        
+        <p>Llegué acá porque, como mis abuelos eran de Bilbao, pensaba mucho en España. Además, mi padre siempre nos animaba a salir, a conocer otras cosas y de ahí me viene mi <span class="blank-word" onclick="toggleBlank(this)">espíritu</span> <span class="blank-word" onclick="toggleBlank(this)">aventurero</span>. Por eso, en cuanto <span class="blank-word" onclick="toggleBlank(this)">tuve</span> una <span class="blank-word" onclick="toggleBlank(this)">oferta</span> de trabajo acá, <span class="blank-word" onclick="toggleBlank(this)">dejé</span> la <span class="blank-word" onclick="toggleBlank(this)">carrera</span>. Aunque <span class="blank-word" onclick="toggleBlank(this)">extraño</span> mucho mi país, este es un lugar increíble para vivir.</p>
+        
+        <p>Mi marido y yo trabajamos como <span class="blank-word" onclick="toggleBlank(this)">instructores</span> en un centro de esquí. La montaña es nuestra oficina, y la verdad es que es hermosa. Damos clases <span class="blank-word" onclick="toggleBlank(this)">particulares</span> o a grupos, tanto a chicos como a <span class="blank-word" onclick="toggleBlank(this)">adultos</span>.</p>
+        
+        <p>Cuando llegamos a las pistas, nos saludamos chocando las manos, porque con los <span class="blank-word" onclick="toggleBlank(this)">cascos</span> no nos podemos besar. Después hacemos calentamiento antes de <span class="blank-word" onclick="toggleBlank(this)">subir</span> a la montaña. A veces <span class="blank-word" onclick="toggleBlank(this)">volamos</span> en <span class="blank-word" onclick="toggleBlank(this)">helicóptero</span> para hacer heliesquí. Y bueno, cuando acá <span class="blank-word" onclick="toggleBlank(this)">llega</span> el <span class="blank-word" onclick="toggleBlank(this)">verano</span>, vamos a Argentina y <span class="blank-word" onclick="toggleBlank(this)">nos dedicamos</span> a lo mismo.</p>
+        
+        <p>Lo mío es la nieve desde que a los cuatro años, en Argentina, <span class="blank-word" onclick="toggleBlank(this)">me puse</span> unos <span class="blank-word" onclick="toggleBlank(this)">esquíes</span>. Allá, en mi región, era un deporte bastante <span class="blank-word" onclick="toggleBlank(this)">elitista</span>, solo para gente con dinero. Mi familia es de <span class="blank-word" onclick="toggleBlank(this)">clase media</span>, pero mi papá <span class="blank-word" onclick="toggleBlank(this)">trabajó</span> mucho para darnos la <span class="blank-word" onclick="toggleBlank(this)">oportunidad</span> de <span class="blank-word" onclick="toggleBlank(this)">disfrutar</span> de la montaña. Para mí esquiar es como una forma de meditación. Son muchas sensaciones y es difícil transmitirlas.</p>
+        
+        <p>Mi hijo tiene tres años. Hasta los seis meses de <span class="blank-word" onclick="toggleBlank(this)">embarazo</span> <span class="blank-word" onclick="toggleBlank(this)">estuve</span> <span class="blank-word" onclick="toggleBlank(this)">esquiando</span>. Algunos decían que era una locura, pero para mí es más natural esquiar que caminar. Quiero que a mi hijo le guste la montaña; además, como mi marido es español, <span class="blank-word" onclick="toggleBlank(this)">unimos</span> dos mundos, y nos gustaría que el chico supiera las costumbres de los dos. ¡Siempre me está preguntando cómo son las cosas de mi país!:«¿Hay playas? ¿Hay montañas?» Y cosas así.</p>
+        
+        <p>Mi hobby es tejer. Empezó como un <span class="blank-word" onclick="toggleBlank(this)">entretenimiento</span>, pero después me di cuenta de que podía sacar un poco de plata. Como siempre estamos en contacto con escuelas de esquí, <span class="blank-word" onclick="toggleBlank(this)">rodeados</span> de frío, me puse una tiendita de <span class="blank-word" onclick="toggleBlank(this)">gorros</span> y <span class="blank-word" onclick="toggleBlank(this)">guantes</span> de lana cerca de mi casa. A <span class="blank-word" onclick="toggleBlank(this)">tejer</span> me enseñó mi mamá, una antigua tejedora. Es otra forma de meditación: estás sola con vos misma y tu tejido, por eso me relaja tanto.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// =========================================================================
+// 1. 完整保留原有全部 122 条高频词汇数据 (vocabularyDB)
+// =========================================================================
+const vocabularyDB = [
+  { word: "animar a", base: "animar a (alguien a hacer algo)", translation: "[B1]鼓励某人做某事;使振奋", context: "", example: "Mis padres siempre me animan a viajar." },
+  { word: "alentar", base: "alentar (a alguien a hacer algo)", translation: "[B2]激励,鼓舞", context: "(比animar更正式) (第三人称单数 alienta)", example: "El discurso del entrenador alentó a los jugadores." },
+  { word: "desanimar", base: "", translation: "使气馁,使灰心", context: "", example: "Las malas noticias la desanimaron mucho." },
+  { word: "animarse a hacer algo", base: "", translation: "某人自己鼓起勇气/决定做某事", context: "", example: "¿Te animas a venir a la fiesta con nosotros?" },
+  { word: "dedicarse a", base: "", translation: "专门从事于....../以......为职业", context: "", example: "Ellos se dedican al comercio internacional." },
+  { word: "transmitir", base: "", translation: "传达,传递(情感/信息) / [B1/B2] 播出,播放,转播(电台、电视节目)", context: "", example: "El profesor transmite su pasión por la historia. / La emisora de radio va a transmitir el debate en directo." },
+  { word: "comunicar", base: "", translation: "交流/传达(官方/正式),告知", context: "", example: "El gobierno comunicó las nuevas medidas ayer." },
+  { word: "informar (de)", base: "", translation: "通知,告知", context: "", example: "Me informaron de que el vuelo tenía retraso. " },
+  { word: "publicar", base: "", translation: "出版/发布", context: "", example: "El escritor publicará su nueva novela en mayo." },
+  { word: "anunciar", base: "", translation: "宣告,宣布", context: "", example: "Los actores anunciaron su boda en las redes sociales." },
+  { word: "difundir", base: "", translation: "传播,散布", context: "(常用于消息/文化/谣言)", example: "El objetivo del instituto es difundir la cultura española. / Las noticias falsas se difunden rápidamente en las redes sociales." },
+  { word: "irse (a vivir) a...", base: "", translation: "[B1]搬去...住", context: "", example: "Después de casarse, se fueron a vivir a las afueras." },
+  { word: "ponerse / montar", base: "Ponerse/montar (un negocio / una tienda)", translation: "[B1]开办,设立(店铺、企业/生意)", context: "相当于 abrir 或 establecer.", example: "Después de ahorrar mucho dinero, monté un restaurante en el centro." },
+  { word: "saludarse", base: "", translation: "互相问候", context: "", example: "Los vecinos se saludan en el ascensor." },
+  { word: "verse", base: "", translation: "相见", context: "", example: "Nos vemos poco porque trabajamos mucho." },
+  { word: "besarse", base: "", translation: "互吻", context: "", example: "Los novios se besaron en el parque." },
+  { word: "abrazarse", base: "", translation: "互拥", context: "", example: "Madre e hija se abrazaron llorando." },
+  { word: "chocar las manos", base: "", translation: "击掌", context: "(方式+同步进行)", example: "Los amigos chocaron las manos al verse. / Los niños celebraron la victoria chocando las manos." },
+  { word: "¡Choca esos cinco!", base: "", translation: "Give me five! 击个掌!", context: "", example: "Hemos ganado el partido, ¡choca esos cinco!" },
+  { word: "darse la mano", base: "", translation: "握手(日常)", context: "", example: "Los políticos se dieron la mano frente a la prensa." },
+  { word: "estrecharse la mano", base: "", translation: "握手(正式)", context: "", example: "Los presidentes se estrecharon la mano como símbolo de paz." },
+  { word: "convivir", base: "", translation: "[B1]共处,共同生活", context: "", example: "Es importante aprender a convivir con otras culturas." },
+  { word: "adaptación / integración", base: "", translation: "[B1]适应/融入", context: "", example: "La integración de los inmigrantes requiere adaptación." },
+  { word: "ponerse el casco", base: "", translation: "戴上头盔", context: "", example: "Por tu seguridad, debes ponerte el casco." },
+  { word: "pista de esquí / esquiar / el esquí", base: "pista de esquí/esquiar/el esquí / ponerse unos/los esquíes (或esquís)", translation: "雪道/滑雪/滑雪板", context: "", example: "La pista de esquí está llena de turistas hoy." },
+  { word: "pista de tenis", base: "", translation: "网球场", context: "", example: "El hotel cuenta con una piscina y una pista de tenis." },
+  { word: "pista de baile", base: "", translation: "舞池", context: "", example: "La novia fue la primera en salir a la pista de baile." },
+  { word: "helicóptero", base: "", translation: "直升机", context: "", example: "El presidente viajó a la isla en helicóptero." },
+  { word: "heliesquí", base: "", translation: "直升机滑雪 / 直升机滑降", context: "(乘坐直升机登上雪山顶部,然后从未经开发的天然雪坡滑下来。)", example: "Practicar heliesquí requiere mucha experiencia y valor." },
+  { word: "caravana / casa rodante / rodar", base: "", translation: "[B1] 房车 / 滚动,拍摄", context: "(现在时态: o➔ue,第三人称单数 rueda)", example: "Al principio vivíamos en una caravana y viajábamos mucho. / La moneda se me cayó y rodó debajo del sofá. / Juana Acosta, que acaba de estrenar en televisión una nueva serie, «Familia», se encuentra rodando en nuestro país una película basada en la vida de Simón Bolívar. " },
+  { word: "deporte de invierno", base: "", translation: "[B1]冬季运动", context: "", example: "El esquí es mi deporte de invierno favorito." },
+  { word: "entrenador / deportista", base: "", translation: "[B1]教练/运动员", context: "", example: "El entrenador preparó una rutina para los deportistas." },
+  { word: "hacer una excursión", base: "", translation: "[B1] 郊游", context: "", example: "Este fin de semana vamos a hacer una excursión por la sierra." },
+  { word: "paisaje natural", base: "", translation: "[B1]自然风光", context: "", example: "Me encanta hacer fotos de los paisajes naturales." },
+  { word: "elitista / élite", base: "", translation: "精英主义的/贵族化的", context: "", example: "Aquel colegio siempre ha tenido una fama de ser muy elitista." },
+  { word: "exclusivo", base: "", translation: "独家的/排外的/高档的", context: "", example: "Esta tienda vende productos muy exclusivos y caros." },
+  { word: "privilegiado", base: "", translation: "享有特权的/得天独厚的", context: "", example: "Tenemos una vista privilegiada del mar desde aquí." },
+  { word: "clase media", base: "", translation: "中产阶级", context: "", example: "La mayoría de los habitantes del barrio son de clase media." },
+  { word: "clase social", base: "", translation: "社会阶级", context: "", example: "El arte a veces refleja la vida de diferentes clases sociales." },
+  { word: "ser de clase alta/media/baja", base: "", translation: "属于上/中/下层阶级", context: "", example: "Aunque esa familia es de clase alta, son muy humildes." },
+  { word: "clase trabajadora", base: "", translation: "工人阶级/劳动阶级", context: "", example: "Este barrio fue fundado por la clase trabajadora." },
+  { word: "plata", base: "", translation: "[B2/拉美]钱(= dinero)", context: "", example: "No puedo ir al cine hoy porque no tengo plata." },
+  { word: "espíritu aventurero / aventura", base: "", translation: "[B1] 冒险精神", context: "", example: "Viajar solo demuestra un gran espíritu aventurero." },
+  { word: "calentar", base: "calentar (los músculos)", translation: "(动词)加热/热身", context: "(增加词汇calentar los músculos) (现在时态：e ➔ ie，第三人称单数 calienta)", example: "Voy a calentar el agua antes de poner la pasta." },
+  { word: "calentamiento", base: "", translation: "(名词)热身/变暖", context: "", example: "El calentamiento es esencial para no lesionarse." },
+  { word: "caluroso", base: "", translation: "(形容词)(天气/月份)炎热的", context: "", example: "Hoy es un día muy caluroso; no quiero salir." },
+  { word: "cálido", base: "", translation: "(形容词)(氛围/气候)温暖的", context: "", example: "Los anfitriones nos dieron una cálida bienvenida." },
+  { word: "sensación", base: "", translation: "生理上的感觉、瞬间的感官体验", context: "", example: "Tengo la sensación de que alguien nos está mirando." },
+  { word: "sentimiento", base: "", translation: "深层的、持久的内心感情", context: "", example: "El odio es un sentimiento muy destructivo." },
+  { word: "sentido", base: "", translation: "感官/意义", context: "", example: "Los murciélagos tienen un gran sentido del oído." },
+  { word: "extrañar", base: "", translation: "[B2/拉美]想念(= echar de menos)", context: "", example: "Aunque vivo en España, extraño mucho a mi familia." },
+  { word: "embarazo", base: "", translation: "怀孕(期)", context: "", example: "Mi tía está en su quinto mes de embarazo." },
+  { word: "embarazarse", base: "", translation: "怀孕", context: "", example: "Mi hermana se embarazó el año pasado." },
+  { word: "nacimiento", base: "", translation: "出生/诞生", context: "", example: "El nacimiento de su hija cambió su vida por completo." },
+  { word: "infancia", base: "", translation: "童年", context: "", example: "Guardo muy buenos recuerdos de mi infancia en el pueblo." },
+  { word: "adolescencia", base: "", translation: "青春期", context: "", example: "Muchos jóvenes son rebeldes durante la adolescencia." },
+  { word: "juventud", base: "", translation: "青年(时期)", context: "", example: "La juventud es la mejor etapa para estudiar y equivocarse." },
+  { word: "madurez", base: "", translation: "成年/成熟(期)", context: "", example: "El escritor alcanzó la madurez literaria en esos años." },
+  { word: "vejez / tercera edad", base: "", translation: "老年/老年群体", context: "", example: "Trabajan para mejorar la calidad de vida en la vejez." },
+  { word: "clases particulares", base: "", translation: "私教课/辅导课", context: "", example: "El niño necesita clases particulares de matemáticas." },
+  { word: "clases en grupo / colectivas", base: "", translation: "小班课/集体课", context: "", example: "Las clases colectivas suelen ser más económicas." },
+  { word: "meditación", base: "", translation: "冥想/沉思", context: "", example: "Hacer meditación cada mañana ayuda a concentrarse." },
+  { word: "reflexión", base: "", translation: "反思/思考", context: "", example: "Necesito un momento de reflexión antes de decidir." },
+  { word: "entretenerse / entretenimiento", base: "", translation: "娱乐/自娱自乐", context: "", example: "El cine sigue siendo uno de los mayores entretenimientos." },
+  { word: "afición", base: "", translation: "爱好", context: "", example: "Mi mayor afición es coleccionar monedas antiguas." },
+  { word: "tejer / tejedora / tejido", base: "", translation: "[B1]织毛衣/纺织女工/织物", context: "(tejido social y económico 社会经济结构)", example: "Mi abuela, que era tejedora, me enseñó a tejer." },
+  { word: "rodear / estar rodeado de", base: "", translation: "包围/环绕", context: "", example: "El jardín central está rodeado de un muro de piedra." },
+  { word: "vos (con vos)", base: "", translation: "[B1/B2 拉美]你(阿根廷等地的 Voseo用法,相当于tú)。", context: "作介词宾语时:con vos = contigo, para vos = para ti.", example: "Me siento muy cómodo hablando de este tema con vos." },
+  { word: "tanto A como B", base: "", translation: "既......也......，.......和......都", context: "", example: "Tanto tú como yo sabemos la verdad. / El evento se celebrará tanto en Madrid como en Barcelona. / Me gusta tanto leer como escribir. / Damos clases... tanto a chicos como a adultos." },
+  { word: "No solo, sino que también", base: "", translation: "不仅...而且...", context: "连接的第二部分(sino后面)紧跟的是一个变位动词时,必须加上que。que的语法作用是引出一个新的从句。", example: "Ella no solo estudia, sino que también trabaja." },
+  { word: "No solo, sino también", base: "", translation: "不仅...而且...", context: "非变位动词不需要加que.", example: "No solo hablo español, sino también inglés. / Me gusta no solo leer, sino también escribir." },
+  { word: "perseguir", base: "", translation: "追求，追赶", context: "现在时：persigo, persigues, persigue, perseguimos, perseguís, persiguen. (e ➔ i); 简过：perseguí, perseguiste, persiguió, perseguimos, perseguisteis, persiguieron. (仅在第三人称单复数时 e ➔ i) /seguir变位一样；seguir+副动词（继续干某事）", example: "" },
+  { word: "pasión por / amor por / odio por", base: "情感名词 + por", translation: "对...的热情 / 对...的爱 / 对...的恨", context: "在西班牙语中，介词 por 引出内心强烈情感的“投注对象”。", example: "Él tiene una gran pasión por el cine." },
+  { word: "en directo", base: "", translation: "现场直播", context: "", example: "La emisora de radio va a transmitir el partido en directo esta noche." },
+  { word: "tejido social", base: "", translation: "社会结构 / 社会纽带 / 社会网络", context: "", example: "Es urgente que cuidemos el tejido social de nuestra comunidad." },
+  { word: "olvidar / olvidarse", base: "olvidar algo / olvidarse de algo / se te olvidó", translation: "忘记 / 遗忘", context: "三种常见用法的区别：<br>1. olvidar algo (及物动词)：主语承担忘记的责任。<br>2. olvidarse de algo (必须加 de)：日常口语中最常用，强调大脑一时的疏忽、想不起来（经常表达想不起来去做什么、“自己让自己处于遗忘的状态”），主语依然承担责任。<br>3. se accidental (se + 间接宾语 + 动词)：日常最常用于“落下、忘带”东西。把物品当主语，表示事情是意外发生的，卸去主体责任。<br><br>se accidental 类似动词用法：<br>• Caer (掉落)：Se me cayó el vaso. (杯子被我不小心摔了。 / 字面：杯子对我来说自己掉下去了。) （对比主动：Tiré el vaso. 我把杯子摔了 -> 听起来像故意的。）<br>• Romper (弄坏)：Se me rompió el móvil. (我不小心把手机弄坏了。)<br>• Perder (弄丢)：Se le perdieron las llaves. (他不小心把钥匙弄丢了。)", example: "1 (olvidar algo): Olvidé mi número de teléfono. (我忘记了我的电话号码。)<br>2 (olvidarse de algo): Me olvidé de comprar las entradas para el cine. (我忘了买电影票。)/听力Tarea 4: ...y me olvidé de los átomos, las moléculas y hasta de la tabla de los elementos.<br>3 (se accidental)听力1: La tengo yo, se te olvidó ayer en el restaurante. " },
+  { word: "alegrar / alegrarse", base: "alegrar a alguien / alegrarse de algo", translation: "使高兴 / 为...感到高兴", context: "<br>1. alegrar (及物)：主语是引发情绪的事物，“使某人高兴”。<br>2. alegrarse de：“自己（让自己）感到高兴”，加 de 引出高兴的原因。", example: "1 (使别人高兴): La noticia de tu boda alegró a toda la familia. (你结婚的消息让全家都很高兴。)<br>2 (自己感到高兴): Me alegro mucho de verte tan feliz en tu nuevo trabajo. (看到你在新工作里这么开心，我为你感到非常高兴。)" },
+  { word: "enamorar / enamorarse", base: "enamorar a alguien / enamorarse de alguien", translation: "使迷恋 / 爱上...", context: "<br>1. enamorar (及物)：“使别人坠入爱河”或“迷住某人”。<br>2. enamorarse de：“自己爱上某人”，必须加 de。", example: "1 (使别人迷恋): Sus palabras románticas lograron enamorar a la chica. (他浪漫的话语成功让那个女孩坠入了爱河。)<br>2 (自己爱上): En aquel viaje, el protagonista se enamoró de una pintora francesa. (在那次旅行中，男主角爱上了一位法国女画家。)" },
+  { word: "cansar / cansarse", base: "cansar a alguien / cansarse de algo", translation: "使疲倦、使厌烦 / 对...感到厌倦", context: "<br>1. cansar (及物)：“使某人感到累或烦”。<br>2. cansarse de：“自己对某事/某人感到厌烦或疲倦”。", example: "1 (使别人疲倦/烦): Este trabajo físico me cansa demasiado. (这份体力活让我太累了。)<br>2 (自己感到厌烦): El estudiante se cansó de hacer siempre los mismos ejercicios de gramática. (那个学生对总是做同样的语法练习感到厌烦了。)" },
+  { word: "sorprender / sorprenderse", base: "sorprender a alguien / sorprenderse de algo", translation: "使惊讶 / 对...感到惊讶", context: "<br>1. sorprender (及物)：“使某人感到惊讶”。<br>2. sorprenderse de：“自己对某事感到意外或惊讶”。", example: "1 (使别人惊讶): El final inesperado de esa película sorprendió a todos los espectadores. (那部电影出人意料的结局让所有观众都感到惊讶。)<br>2 (自己感到惊讶): Los padres se sorprendieron mucho de la actitud de su hijo. (父母对儿子的态度感到非常惊讶。)" },
+  { word: "preocupar / preocuparse", base: "preocupar a alguien / preocuparse de (por) algo", translation: "使担忧 / 对...感到担忧、操心", context: "<br>1. preocupar (及物)：“让某人感到担心”。<br>2. preocuparse de / por：“自己去操心、担忧某事”。", example: "1 (使别人担忧): La falta de lluvia preocupa mucho a los agricultores. (缺乏降雨让农民们非常担忧。)<br>2 (自己去操心/担忧): No debes preocuparte de los detalles, yo lo organizo todo. (你不用去操心细节，我会把一切都安排好。)" },
+  { word: "enterar / enterarse", base: "enterar a alguien / enterarse de algo", translation: "通知，告知 / 得知，打听到", context: "<br>1. enterar (及物)：“把某事通知给某人”。<br>2. enterarse de：“自己获知、察觉到某事”。", example: "1 (通知别人): El director no enteró a los empleados de los nuevos cambios. (经理没有把新的变动通知给员工。)<br>2 (自己得知): Me he enterado de que van a abrir un nuevo restaurante en nuestro barrio. (我得知我们街区要开一家新餐厅了。)" },
+  { word: "despedir / despedirse", base: "despedir a alguien / despedirse de alguien", translation: "解雇，辞退 / 向...告别", context: "<br>1. despedir (及物)：主语让别人离开（解雇 / 送客）。<br>2. despedirse de：自己主动向某人道别、辞行。", example: "1 (解雇别人): La empresa tuvo que despedir a cincuenta trabajadores por la crisis. (因为经济危机，公司不得不解雇五十名工人。)<br>2 (自己告别): Fui al aeropuerto para despedirme de mis amigos antes de su viaje a Europa. (我去了机场，在朋友们去欧洲旅行前向他们告别。)" },
+  { word: "darse cuenta de", base: "darse cuenta de algo / que", translation: "意识到，发觉", context: "逻辑解析：dar 是“给”，cuenta 是“账目/注意”，加了 se 和 de 后，字面意思是“给自己算清了账”，引申为“自己察觉到 / 意识到”。后面接名词/(de) que 引导的从句。", example: "El detective se dio cuenta de que el ladrón había entrado por la ventana del baño. (侦探意识到小偷是从浴室的窗户进来的。)/Rita, la sirena, se da cuenta de que algunos animales del mar están enfermando. / ...después me di cuenta de que podía sacar un poco de plata." },
+  { word: "arreglar / arreglarse", base: "arreglar algo / arreglarse", translation: "修理，收拾，解决 / 打扮，梳洗", context: "两种常见用法的区分：<br>1. arreglar algo (及物动词)：表示“修理（电器/机器等）”、“整理/收拾（房间/物品）”或“解决/安排（问题/事情）”。<br>2. arreglarse：表示“梳洗、打扮、整理自己的仪容仪表”。", example: "1 (修理/解决): El técnico vino a casa para arreglar el ordenador que no funcionaba. (技术人员来家里修理坏了的电脑。)<br>2 (打扮/梳洗): Dame cinco minutos para arreglarme un poco antes de salir a la fiesta. (在出发去派对之前，给我五分钟打扮一下。)" },
+  { word: "dedicar / dedicarse", base: "dedicar algo a / dedicarse a / dedicada a", translation: "投入，献给 / 致力于...，从事于...", context: "两种常见用法的区分：<br>1. dedicar algo a (及物动词)：表示“把（时间、精力、金钱等）投入到...”或“把（书、歌、作品等）献给...”。<br>2. dedicarse a (必须加 a)：表示“某人从事于（某个职业/行业）”或“致力于某事”。<br>3. 听力中的 dedicada a 是过去分词作形容词，修饰阴性名词 empresa。", example: "1 (dedicar algo a): Dedico dos horas al día a estudiar español. (我每天花两个小时学西班牙语。) / El escritor le dedicó su primer libro a su madre. (作家把他的第一本书献给了母亲。)<br>2 (dedicarse a): Mi hermano se dedica a la enseñanza de idiomas en la universidad. (我哥哥在大学里从事语言教学工作。)" },
+  { word: "llevarse", base: "llevarse algo", translation: "带走 / 拿走", context: "RAE: Separar o apartar algo del lugar en que está, atrayéndolo hacia sí. 表示把某物从所在的地方随身带走。", example: "Me la llevé sin querer entre mis carpetas." },
+  { word: "carpeta", base: "", translation: "文件夹", context: "", example: "Me la llevé sin querer entre mis carpetas." },
+  { word: "pasar por", base: "", translation: "顺道去 / 路过", context: "", example: "Si te parece bien, me paso por allí y te la doy." },
+  { word: "director general", base: "", translation: "总经理 / 总裁", context: "", example: "Mañana tengo una reunión con el director general." },
+  { word: "informe comercial", base: "", translation: "商业报告 / 业务报告", context: "", example: "En el informe comercial que me enviaste no aparecen los gastos." },
+  { word: "gasto", base: "", translation: "花费 / 开销", context: "", example: "No aparecen los gastos de marketing y publicidad." },
+  { word: "publicidad", base: "", translation: "广告 / 宣传", context: "", example: "Gastos de marketing y publicidad." },
+  { word: "correr prisa", base: "me corre mucha prisa", translation: "迫切 / 非常着急", context: "RAE: Urgir, ser apremiante algo. 表示某件事对某人来说非常紧急、需要立刻办理。", example: "Mándame por correo electrónico esta información, que me corre mucha prisa." },
+  { word: "currículum", base: "currículum (vitae)", translation: "简历", context: "", example: "Hemos visto su currículum y nos gustaría hacerle una entrevista de trabajo." },
+  { word: "fijar", base: "fijar la hora", translation: "确定 / 约定（时间）", context: "", example: "Por favor, llámenos en cuanto pueda para fijar la hora." },
+  { word: "venir bien", base: "venirle bien (a alguien)", translation: "对（某人）合适 / 方便", context: "", example: "Si le viene bien, podría ser el viernes de la semana que viene." },
+  { word: "echar una mano", base: "", translation: "帮个忙 / 搭把手", context: "", example: "Necesito que me eches una mano porque no me funciona el portátil." },
+  { word: "portátil", base: "ordenador portátil", translation: "笔记本电脑", context: "", example: "No me funciona el portátil." },
+  { word: "conceder", base: "conceder la hipoteca", translation: "批准 / 发放（贷款或抵押）", context: "", example: "Me ha dicho que nos han concedido la hipoteca." },
+  { word: "hipoteca", base: "la hipoteca", translation: "抵押 / 听力中常用来指房屋抵押贷款（préstamo hipotecario）", context: "常见搭配：<br>• Pedir / Solicitar una hipoteca：申请房贷<br>• Pagar la hipoteca：还房贷<br>• Nos han concedido la hipoteca：银行批准了我们的房贷<br>• Pagar la cuota de la hipoteca：还每月的房贷月供", example: "Me acaba de llamar Ana Costa y me ha dicho que nos han concedido la hipoteca." },
+  { word: "despacho", base: "", translation: "办公室", context: "", example: "Cuando salgas del despacho, recoge la tarta." },
+  { word: "recoger", base: "", translation: "取 / 拿 / 接", context: "", example: "Recoge la tarta que encargué ayer." },
+  { word: "tarta", base: "", translation: "蛋糕", context: "", example: "Recoge la tarta que encargué ayer." },
+  { word: "encargar", base: "encargar / encargarse de", translation: "预订，委托 / 负责做某事", context: "encargar 意为“预订商品”或“委托别人做事”；encargarse de 意为“亲自承担或负责处理某事”。", example: "Recoge la tarta que encargué ayer. / (Ejemplo extra): No te preocupes por la comida, yo me encargo de cocinar hoy." },
+  { word: "recordar", base: "", translation: "提醒 / 记住 / 想起", context: "", example: "Te recuerdo que ya está pagada." },
+  { word: "agencia", base: "agencia (de viajes)", translation: "中介 / 代理处（旅行社）", context: "", example: "La agencia que me recomendó Elena me gustó." },
+  { word: "ofertas de última hora", base: "", translation: "最后一刻的特价优惠", context: "", example: "Mira los vuelos en esa página web de ofertas de última hora." },
+  { word: "guía", base: "guía (de viaje)", translation: "旅游指南 / 导游手册", context: "", example: "Elena me dijo que pasaras por su casa a buscar la guía de París." },
+  { word: "creación", base: "su creación", translation: "创立 / 创建", context: "名词，指公司、机构的建立或艺术品的创作。动词是 crear。", example: "La creación de una nueva empresa requiere mucho tiempo y dinero. (创立一家新公司需要很多时间和金钱。)" },
+  { word: "importar", base: "importar", translation: "进口", context: "反义词：exportar 出口。", example: "Este país necesita importar una gran cantidad de petróleo para su industria. (这个国家需要为其工业进口大量的石油。)" },
+  { word: "motocicleta", base: "motocicletas", translation: "摩托车", context: "日常口语中常简称为 moto。", example: "Compró una motocicleta nueva para viajar por la ciudad más rápido. " },
+  { word: "camión", base: "camiones", translation: "卡车 / 货车", context: "注意单数camión，复数camiones", example: "El conductor del camión descansó unas horas en la estación de servicio. " },
+  { word: "eléctrico", base: "eléctricos", translation: "电动的 / 电的", context: "B1语境：科技/环保类题目，如 vehículos eléctricos (电动汽车)。", example: "Decidieron comprar un coche eléctrico para no contaminar el medio ambiente. (他们决定买一辆电动汽车，以免污染（注意新词）环境。)" },
+  { word: "decidir", base: "decidió", translation: "决定", context: "decidir + 原形动词：决定做某事。", example: "Por fin decidió comprarse una casa en las afueras de la ciudad. " },
+  { word: "ampliar", base: "ampliar", translation: "扩大 / 扩展", context: "ampliar el negocio (扩大业务/生意)。", example: "El dueño quiere ampliar su negocio abriendo una nueva tienda en la capital. " },
+  { word: "elaboración", base: "la elaboración", translation: "制作 / 制造", context: "名词，指加工、生产的过程。动词是 elaborar。", example: "La elaboración de este vino tradicional requiere un proceso muy lento. (这款传统葡萄酒的酿造需要一个非常缓慢的过程。)" },
+  { word: "elaborar", base: "elaborar", translation: "制作 / 制造 / 起草", context: "B1语境：<br>1. 制造/加工（产品、食品等）：相当于 fabricar 或 preparar。<br>2. 起草/精心准备（文件、计划、报告等）：如 elaborar un informe (起草报告), elaborar un plan (制定计划)。<br>名词形式是 la elaboración。", example: "1 (制造): Esta fábrica elabora quesos tradicionales de excelente calidad. (这家工厂制作出品质极佳的传统奶酪。)<br>2 (起草/准备): El director pidió a los empleados que elaboraran un informe sobre las ventas. (经理要求员工们准备一份关于销售的报告。)" },
+  { word: "vehículo", base: "vehículos", translation: "交通工具 / 车辆", context: "包含汽车、摩托车、卡车等所有交通工具的总称。", example: "Está prohibido aparcar cualquier tipo de vehículo en esta calle. (这条街上禁止（注意新词）停放任何类型的车辆。)" },
+  { word: "declarar", base: "declaró", translation: "宣布 / 声明", context: "表示官方或正式地发表言论。declarar vs anunciar 的区别：<br>Declarar：偏向于“郑重声明、表明立场”或“官方/法律上的宣告”。<br>Anunciar：偏向于“公布新消息、预告即将发生的事、打广告”（如宣布结婚、发布新产品等）。", example: "1 (declarar 声明/陈述): El testigo declaró ante el juez todo lo que había visto esa noche. (证人向法官陈述了那晚他看到的一切。)<br>2 (anunciar 公布新消息): La empresa anunció que lanzará un nuevo teléfono móvil el mes que viene. (公司宣布下个月将发布一款新手机。)" },
+  { word: "a nivel nacional e internacional", base: "a nivel nacional e internacional", translation: "在国内外层面上", context: "固定搭配：a nivel + 形容词 (在...层面上 / 在...范围内)。", example: "Este producto ha tenido un gran éxito tanto a nivel nacional como internacional. (这款产品在国内外都取得了巨大的成功。)" },
+  { word: "acuerdo", base: "acuerdos", translation: "协议 / 共识", context: "常见搭配：llegar a un acuerdo (达成协议) / tener acuerdos para... (有...的协议)。", example: "Las dos empresas llegaron a un acuerdo comercial muy beneficioso para ambas. (两家公司达成了一项对双方都非常有利的商业协议。)" },
+  { word: "feria", base: "feria", translation: "展会 / 集市", context: "指“博览会/展销会”，如 la feria de la moda (时装展)。", example: "El fin de semana fuimos a la feria del libro para comprar algunas novelas." },
+  { word: "contar con", base: "contar con", translation: "拥有 / 具备 / 依靠", context: "B1语境：<br>1. 表示“拥有，具备（某种条件、设施、人员等）”，相当于 tener。<br>2. 表示“指望，依靠（某人/某事）”。", example: "1 (拥有): Este hotel cuenta con una piscina cubierta y un gimnasio excelente. (这家酒店拥有一个室内游泳池和一个极好的健身房。)<br>2 (依靠): Puedes contar conmigo para organizar la fiesta de sorpresa. (你可以指望我来组织这场惊喜派对。)" },
+  { word: "moda", base: "la moda", translation: "时尚 / 服装业", context: "estar de moda 表示“正流行”。", example: "Ese tipo de pantalones ya no está de moda entre los jóvenes de hoy. (那种裤子在现在的年轻人中已经不流行了。)" },
+  { word: "oficialmente", base: "oficialmente", translation: "官方地 / 正式地", context: "abre oficialmente sus puertas (正式对外开放)。", example: "El presidente del gobierno inauguró oficialmente el nuevo hospital de la ciudad. (政府主席正式为该市的新医院揭幕（揭幕，新词 inaugurar）。)" },
+  { word: "expositor", base: "expositores", translation: "参展商 / 展出者", context: "指在展会上设立展位展示产品的公司或个人。", example: "La feria de tecnología cuenta con más de trescientos expositores de todo el mundo. " },
+  { word: "exposición", base: "la exposición", translation: "展览 / 展出 / 报告", context: "名词。动词是 exponer。B1语境中有两个常见用法：<br>1. 指艺术展、博览会等（如 exposición de arte）。<br>2. 指在课堂、会议上的“口头报告 / 演讲”（hacer una exposición）。", example: "1 (展览): Mañana vamos a visitar una exposición de fotografía en el museo de arte. (明天我们要去美术馆参观一个摄影展。)<br>2 (报告): El estudiante hizo una exposición brillante sobre el cambio climático. (那个学生就气候变化做了一场精彩的口头报告。)" },
+  { word: "organizador", base: "organizadores", translation: "组织者 / 主办方", context: "动词是 organizar (组织)。", example: "Los organizadores del evento repartieron agua a todos los participantes. (活动的组织者向所有参与者分（参与者也是必背词汇）发了水。)" },
+  { word: "prever", base: "prevén", translation: "预见 / 预计", context: "由 pre (预先) + ver (看) 组成，变位同 ver，但因为它以元音结尾，为了保持和 ver 一样的重音位置，变位时必须加上重音符号。陈述式现在时：yo preveo, tú prevés, él/ella prevé, nosotros prevemos, vosotros prevéis, ellos/ellas prevén。", example: "Los expertos prevén una mejora de la economía para el próximo año. (专家预计明年的经济会有所好转（注意mejora，名词，必背）。)" },
+  { word: "curso", base: "en el curso de", translation: "在...期间 / 过程中", context: "时间表达法，等同于 durante。", example: "Aprenderás mucha gramática en el curso de estos tres meses. " },
+  { word: "recorrer", base: "recorrerán", translation: "走过 / 巡视 / 逛", context: "指走遍某个区域。recorrer la feria 就是“逛展会”。", example: "Durante nuestras vacaciones, queremos recorrer las ciudades más bonitas de Italia. (在我们的假期里，我们想逛遍意大利最美丽的城市。)" },
+  { word: "pabellón", base: "pabellones", translation: "展馆 / 展厅", context: "在大型博览会中，各个独立的大型展览馆叫做 pabellón。", example: "El pabellón de deportes estaba lleno de aficionados animando a su equipo. " },
+  { word: "versión", base: "la versión", translation: "版本 / （展会的）届", context: "听力中指“去年的那一届博览会”。", example: "Acaban de publicar una nueva versión de esa aplicación para el móvil. (他们刚刚发布了那个手机应用的新版本。)" },
+  { word: "actriz", base: "actriz", translation: "女演员", context: "阳性是 actor。", example: "Esa actriz ganó un premio internacional por su brillante actuación. (那位女演员因其出色的表演获得了一项国际大奖。)" },
+  { word: "obtener", base: "obtuvo", translation: "获得 / 取得", context: "变位同 tener。", example: "El estudiante obtuvo la nota más alta de toda la clase en el examen de matemáticas. " },
+  { word: "de reparto", base: "actriz de reparto", translation: "配角", context: "actor/actriz de reparto (男/女配角)；actor/actriz principal (主角)。", example: "Trabajó como actor de reparto en una famosa serie de televisión policial. " },
+  { word: "interpretación", base: "su interpretación", translation: "表演 / 诠释", context: "在影视语境中，指演员对角色的演绎、表演。", example: "El público aplaudió largamente la magnífica interpretación del actor principal. " },
+  { word: "acabar de", base: "acaba de", translation: "刚刚做完某事", context: "语法结构：acabar de + 原形动词。", example: "Acabo de terminar mis deberes y ahora me voy a descansar un rato. (我刚做完作业，现在要去休息一会儿。)" },
+  { word: "estrenar", base: "estrenar", translation: "首映 / 首次播出 / 第一次使用", context: "可以指电影上映，也可以指你第一次穿某件新衣服（estrenar una camisa）。", example: "La semana que viene van a estrenar una película de terror muy esperada. (下周他们将首映一部备受期待的恐怖电影。)" },
+  { word: "basarse en", base: "basada en", translation: "基于...改编 / 以...为基础", context: "过去分词作形容词，修饰 película (阴性)，所以用 basada en。", example: "Esta exitosa novela se basa en hechos reales ocurridos en el siglo pasado. (这本畅销小说是基于上个世纪发生的真实事件改编的。)" },
+  { word: "escultora", base: "La escultora", translation: "女雕塑家", context: "阳性是 escultor。", example: "La joven escultora presentó su obra de mármol en el museo de arte contemporáneo. (这位年轻的女雕塑家在当代艺术博物馆展出了她的大理石作品。)" },
+  { word: "presentar", base: "ha presentado", translation: "展示 / 介绍 / 发布", context: "听力里指发布或推出新书/新作品。", example: "El famoso autor va a presentar su nuevo libro en la biblioteca municipal. " },
+  { word: "recopilar", base: "recopila", translation: "汇集 / 收集 / 汇编", context: "指把不同时期或不同地方的作品/资料收集到一起。", example: "El periodista recopiló mucha información de diversas fuentes para escribir el artículo. (记者从各种来源收集了大量信息来撰写这篇文章。)" },
+  { word: "obra artística", base: "obra artística", translation: "艺术作品", context: "obra 指“作品”（书、画、雕塑等），artística 是形容词“艺术的”。", example: "Esta exposición de París reúne la obra artística más importante de Picasso. " },
+  { word: "estar previsto que", base: "está previsto que", translation: "预计... / 计划...", context: "表达对未来尚未发生的计划或期待的无人称结构（如 es necesario que, es probable que, está previsto que）。当后面接 que 引导的从句时，表达的类似“计划让他者做某事、且尚未发生“，因此从句动词必须用虚拟式。", example: "Está previsto que el presidente anuncie las nuevas medidas económicas mañana por la mañana. (按计划，总统将于明早宣布新的经济措施。)" },
+  { word: "pronunciar", base: "pronuncie", translation: "发表（演讲）", context: "pronunciar una conferencia (发表演讲)。", example: "El director general va a pronunciar un discurso de bienvenida a los nuevos empleados. (总经理将向新员工致欢迎辞。)" },
+  { word: "exponer(se)", base: "se expone", translation: "展出 / 展览", context: "被动（pasiva refleja）。字面意思是“她的作品（自己）被展出”。", example: "Sus cuadros más famosos se exponen en la galería central del museo. (他最著名的画作在博物馆的中央画廊展出。)" },
+  { word: "conferencia", base: "una conferencia", translation: "会议 / 讲座 / 演讲", context: "dar/pronunciar una conferencia 意思是“举办一场讲座/发表演讲”。", example: "Ayer asistí a una conferencia muy interesante sobre el cambio climático y sus consecuencias. (昨天我听了一场关于气候变化（新搭配）及其后果（新词）的非常有意思的讲座。)" },
+  { word: "religioso", base: "religioso", translation: "宗教的", context: "形容词，修饰 sentido (意义)。", example: "Ese antiguo templo tiene un gran valor religioso y cultural para la ciudad. (那座古老的寺庙对这座城市有着巨大的宗教和文化价值。)" },
+  { word: "escultura", base: "su escultura", translation: "雕塑", context: "指雕刻这门艺术，或者具体的雕塑作品。", example: "En el centro de la plaza principal hay una escultura de bronce preciosa. (在主广场的中央有一座非常漂亮的青铜雕塑。)" },
+  { word: "cuyo / cuya", base: "cuyo", translation: "...的 (其)", context: "关系形容词，表示所属关系，相当于英文的 whose。用法注意：<br>1. 它必须紧跟在它所修饰的名词前面，并且它的性、数要和**后面**的名词保持一致，而不是和前面的先行词一致。<br>2. 听力原句“También está previsto que el próximo día 9 Eva López pronuncie en Medellín, en cuyo Museo de Arte Moderno se expone desde hace dos semanas su obra más reciente, una conferencia sobre el sentido religioso de su escultura.”中，cuyo 修饰阳性单数名词 Museo，表示“（麦德林的）那个现代艺术博物馆”。", example: "Ayer conocí a un escritor cuyas novelas son muy famosas en toda Europa. (昨天我认识了一位作家，他的小说在全欧洲都非常出名。)" },
+  { word: "empatar", base: "empató", translation: "打平 / 战平", context: "表示比赛双方得分相同。常搭配 con (和...打平) 或 a (打成几比几，如 empatar a uno 表示 1-1 平)。名词形式是 el empate。", example: "El equipo local jugó muy bien durante todo el partido, pero solo empató al final del partido. (主队整场比赛踢得都很好，但在比赛最后只拿到了平局。)" },
+  { word: "Atlético", base: "El Atlético", translation: "竞技的（队名）", context: "哥伦比亚的著名足球队“民族竞技队”（Atlético Nacional）。在西班牙也有 Atlético de Madrid（马德里竞技）。", example: "El joven jugador fichó por（fichar por西班牙用法） un club atlético muy importante de la primera división. (这名年轻球员签约了甲级联赛一家非常重要的竞技俱乐部。)" },
+  { word: "mantenerse", base: "se mantiene", translation: "保持（状态/身份）", context: "mantenerse como líder：保持领先者/榜首的地位。", example: "A pesar de las dificultades del mercado, la empresa se mantiene como líder en ventas. (尽管市场充满困难，该公司仍保持着销售领先的地位。)" },
+  { word: "derrotar", base: "tras derrotar", translation: "击败 / 战胜", context: "derrotar al Medellín：击败麦德林队。", example: "Nuestro equipo logró derrotar al actual campeón en los últimos minutos del partido. (我们的队伍在比赛的最后几分钟成功击败了现任冠军。)" },
+  { word: "gol", base: "un gol / por ... goles", translation: "进球", context: "表示比分或分差时常搭配前置词 por，如 ganar por 1-0 读作 'ganar por un gol a cero'，或者简短地说 'uno a cero'；也可以用来表示“以一球的差距”（por un gol）。", example: "1 (打进一球): El delantero marcó un gol espectacular desde fuera del área penal. (前锋在禁区外打进了一粒精彩绝伦的进球。)<br>2 (表示比分/分差): Nuestro equipo ganó la final del campeonato por un gol a cero. (我们的球队以一比零赢得了锦标赛决赛。)" },
+  { word: "delantero", base: "delantero", translation: "前锋", context: "足球位置术语。portero(门将), defensa(后卫), centrocampista(中场), delantero(前锋)。", example: "El equipo necesita contratar（新词） a un buen delantero para poder marcar más goles esta temporada. (球队需要签下一名优秀的前锋，以便在本赛季打进更多球。marcar goles，新搭配)" },
+  { word: "entrenador", base: "El entrenador", translation: "教练", context: "动词是 entrenar (训练)。", example: "El entrenador diseñó una estrategia perfecta para ganar el partido de la final. " },
+  { word: "equipo", base: "el equipo", translation: "队伍 / 球队", context: "这里指足球队。", example: "Todos los miembros del equipo de rescate（必背词汇） trabajaron sin descanso para salvar a las víctimas. (救援队的所有成员都在不知疲倦地工作以拯救受害者。)" },
+  { word: "merecer", base: "mereció (la victoria)", translation: "值得 / 配得上", context: "merecer 用法：<br>1. merecer algo：配得上某物，应得某物。例如这里“mereció la victoria”意思是“理应获得胜利 / 配得上这场胜利”。再比如：Mereces unas buenas vacaciones (你配得上一个好假期)。<br>2. merecer la pena：固定短语，表示“值得去做”。例如：Merece la pena visitar ese museo (那个博物馆值得一去)。", example: "Esa chica ha estudiado muchísimo todo el año, así que merece aprobar el examen con buena nota. (那个女孩一整年都学得非常刻苦，所以她理应以高分通过考试。)" },
+  { word: "recordar", base: "recordó", translation: "想起 / 提醒 / 提及", context: "", example: "Siempre recuerdo con mucho cariño las vacaciones de verano que pasamos en tu pueblo." },
+  { word: "favorecer", base: "favoreció", translation: "偏袒 / 有利于", context: "动词，意思是给...带来好处或偏袒某方。听力中recordó que el año pasado la suerte favoreció al equipo de Medellín指“运气站在了麦德林队那边”。", example: "El clima cálido y húmedo de esta región favorece el cultivo de frutas tropicales. (该地区温暖潮湿的气候有利于热带水果的种植。)" },
+  { word: "servicio meteorológico", base: "servicio meteorológico", translation: "气象局 / 天气预报服务", context: "B1听力常见", example: "El servicio meteorológico ha anunciado fuertes tormentas para este fin de semana. " },
+  { word: "pronosticar", base: "pronostica", translation: "预测 / 预报", context: "名词是 el pronóstico (预报，如 el pronóstico del tiempo)。", example: "Los expertos pronostican un invierno mucho más frío y duro de lo normal. (专家预测今年的冬天将比往年更冷、更严酷。)" },
+  { word: "seco", base: "seco", translation: "干燥的", context: "反义词是 húmedo (潮湿的) 或 lluvioso (多雨的)。", example: "Necesitas guardar estos documentos importantes en un lugar fresco y seco. " },
+  { word: "ola de calor", base: "ola de calor", translation: "热浪", context: "气象词汇。ola 意思是“波浪”，引申为“一波...”。相反的是 ola de frío (寒潮)。", example: "Las autoridades sanitarias（必背） recomiendan beber mucha agua y no salir a la calle durante esta ola de calor. (卫生部门建议在这次热浪期间多喝水，不要出门。)" },
+  { word: "nube", base: "las nubes", translation: "云", context: "B1相关表达：estar por las nubes (价格飞涨/极高)。", example: "El servicio meteorológico pronostica un día gris con muchas nubes en el norte del país. " },
+  { word: "nublado", base: "nublado", translation: "多云的 / 阴天的", context: "常搭配动词 estar nublado 。", example: "No hace falta que lleves gafas de sol porque el cielo está completamente nublado. " },
+  { word: "subir", base: "subirán", translation: "上升 / 升高", context: "表示气温升高（反义词是 bajar）。另外也会用于表示“上传（照片/文件）”或“上车/上楼”。", example: "Los expertos anuncian que mañana subirán las temperaturas en casi toda la península. (专家宣布明天半岛大部分地区的气温将会上升。)" },
+  { word: "deber / deberse a / deber algo a", base: "deber / se debe a / deber algo a alguien", translation: "应该 / 归因于 / 欠...某物（或把...归功于）", context: "核心用法：<br>1. deber + 原形：表示“应该、必须”（义务）。<br>2. deber algo a alguien：表示“欠某人某物”或“把（某事）归功于某人”。<br>3. deberse a...：字面意思是“（某事）将自己归功于/归因于...”，实际翻译为“由于... / 归因于...”。", example: "1 (应该): Debes descansar más. <br>2 (欠/归功于): Le debo cien euros a Juan. (我欠胡安100欧。) / Les debo mi éxito a mis profesores. (我把成功归功于老师们。)<br>3 (归因于): El retraso del vuelo se debe al mal tiempo. (航班延误归因于恶劣天气。)/El éxito de la empresa se debe al gran esfuerzo de todos los trabajadores. (公司的成功归因于所有员工的巨大努力。)" },
+  { word: "amistad", base: "amistad", translation: "友谊", context: "amistad名词。形容词是 amistoso/a (友好的)。", example: "Nuestra amistad empezó cuando íbamos juntos al instituto hace diez años. " },
+  { word: "hacer falta", base: "haga falta / hacen falta", translation: "需要 / 缺少", context: "用法跟 gustar 一样，主语是需要/缺少的东西。<br>1. hacen falta：当需要的东西是【复数】时，动词用复数。", example: "1 (hacen falta): Para hacer esta receta, me hacen falta cinco tomates. (做这道菜，我需要五个西红柿。)<br>2 No creo que nos haga falta llevar abrigo, hace mucho calor hoy. (我不觉得我们需要带外套，今天太热了。)/Me hace falta comprar un ordenador nuevo." },
+  { word: "antelación", base: "con antelación", translation: "提前", context: "con + 时间 + de antelación (提前...时间)。", example: "Para conseguir un buen precio, tienes que comprar los billetes de avión con tres meses de antelación. " },
+  { word: "desde luego", base: "desde luego", translation: "当然 / 毫无疑问", context: "相当于 ¡Por supuesto! 或 ¡Claro que sí!。", example: "—¿Vas a venir a mi fiesta de cumpleaños esta noche?<br>—¡Desde luego! No me la perdería por nada. " },
+  { word: "bajar", base: "bajar a", translation: "下去 / 下楼去...", context: "后接 a + 目的地。", example: "Voy a bajar al supermercado a comprar leche, ¿necesitas algo? " },
+  { word: "esquina", base: "de la esquina", translation: "拐角 / 街角", context: "el bar de la esquina / la tienda de la esquina 是一种习惯表达，指“家附近街角的酒吧/便利店”。", example: "Siempre compro el pan fresco en la panadería de la esquina. (我总是在街角的面包店买新鲜面包。)" },
+  { word: "ofrecer", base: "ofrecer", translation: "提供 / 给予", context: "常见搭配 ofrecer un trabajo 。名词形式是 la oferta (比如 ofertas de última hora)。", example: "La empresa le ha ofrecido un puesto muy bueno en la sucursal de Madrid. " },
+  { word: "pensar", base: "pensar en", translation: "考虑 / 想着...", context: "表达“脑子里想着某人/考虑做某事”时，用 pensar en + 名词/原形动词。", example: "Estoy pensando en estudiar un máster el próximo año para mejorar mi currículum. " },
+  { word: "cambiar", base: "cambiar de", translation: "更换（状态、所属物）", context: "当表达“换工作、换衣服、换主意”时，必须用 cambiar de，且后面不加冠词（cambiar de trabajo, cambiar de ropa）。", example: "Mi hermano quiere cambiar de coche porque el suyo gasta demasiada gasolina. " },
+  { word: "bomba", base: "es una bomba", translation: "爆炸性新闻 / 炸弹", context: "原意是“炸弹”。ser una bomba 表示“这是一个重磅消息（好事坏事都可以）”。", example: "¡La noticia del embarazo de Laura es una bomba! Nadie lo esperaba en la oficina. " },
+  { word: "casarse", base: "casarse (con)", translation: "结婚", context: "和某人结婚要用介词 con (casarse con alguien)。", example: "Mis primos van a casarse en una ceremonia muy íntima en la playa de Valencia. " },
+  { word: "ni siquiera", base: "ni siquiera", translation: "连...都不 / 甚至不", context: "用于加强否定语气", example: "Estaba tan cansado después del trabajo que ni siquiera cenó antes de acostarse. " },
+  { word: "salir", base: "Es mexicano y llevan saliendo un año. / salir carísimo", translation: "交往，谈恋爱 / 花费，结果是", context: "两种用法：<br>1. salir / salir con alguien：“约会、谈恋爱” <br>2. salir + 形容词/副词 (如 caro/barato)：表示“某件事算下来花费了多少钱”或“最终代价如何”。", example: "1 (交往): Mi hermana está saliendo con un chico estupendo desde enero. <br>2 (花费/代价): Cenar en ese restaurante de lujo te puede salir muy caro. <br>3 (事情的结果): Estaba muy nervioso, pero al final la presentación de ayer salió perfectamente. (我当时很紧张，但最终昨天的展示进行得非常顺利/结果十分完美。)" },
+  { word: "presentar", base: "presentar a alguien", translation: "介绍", context: "presentar a alguien a otra persona (把某人介绍给另外一个人)。", example: "Tu vecina, la que me presentaste ayer, me saludó al pasar." },
+  { word: "mandar", base: "mandar", translation: "发送 / 寄", context: "在这里等同于 enviar。mandar un mensaje (发信息), mandar una carta (寄信)。", example: "Ayer mandé el paquete por correo y debería llegar mañana por la mañana." },
+  { word: "invitación", base: "invitaciones de boda", translation: "邀请函 / 请柬", context: "boda 是婚礼。invitaciones de boda 结婚请柬。", example: "Ya hemos recibido todas las invitaciones para la fiesta de aniversario de la empresa. " },
+  { word: "faltar", base: "faltar / lo que me faltaba", translation: "缺少 / 雪上加霜，偏偏赶上这个", context: "faltar 也是像 gustar 一样用法的动词，表示“缺少...”。<br>听力中的短语 'lo que me faltaba'（字面：这就是我还缺少的东西）是反语。表示“我已经够倒霉了，偏偏又来这一出”。", example: "1 (缺少): Me faltan solo dos páginas para terminar de leer el libro. (我只差两页就把这本书读完了。)<br>2 (原文例句): Me alegro mucho por ella, pero esta boda es lo que me faltaba. Se casa un amigo íntimo en junio y me va a salir carísimo... (我为她高兴，但这婚礼真是让我雪上加霜...)" },
+  { word: "íntimo", base: "amigo íntimo", translation: "亲密的 / 私人的", context: "un amigo íntimo", example: "Solo invité a mi familia y a mis amigos más íntimos a la cena de graduación. " },
+  { word: "dar miedo", base: "dar miedo", translation: "让某人害怕", context: "用法等同于 gustar。主语是“让某人恐惧的事物”。当主句表达情绪，且从句的主语/动作执行者与主句的情绪接收者不一致时，后接 que + 虚拟式。", example: "Me da mucho miedo que la situación económica empeore este año. (我很害怕今年的经济形势会恶化。)/Me da mucho miedo volar en avión." },
+  { word: "hacer ilusión", base: "hacer ilusión", translation: "让人期待 / 让...非常高兴", context: "用法等同于 gustar。表示某事让人满怀期待、兴奋或开心。", example: "Me hace mucha ilusión que vengas a visitarme en Navidad. (如果你圣诞节能来看我，我会满怀期待、非常高兴的。)/Me hace mucha ilusión viajar a España este verano." },
+  { word: "un par de", base: "un par de", translation: "几个 / 一两个", context: "字面意思是“一对”，但在口语中 un par de días, un par de cosas 往往指代“几个 / 一两个（数量不多，且不严格等于2）”。", example: "Solo necesito un par de minutos para terminar este informe y me voy." },
+  { word: "apetecer", base: "apetecer", translation: "想（做某事）/ 渴望", context: "用法等同于 gustar。当从句中的动作执行者/主语与主句的情绪接收者不一致时，后接 que + 虚拟式。", example: "No me apetece que salgamos esta noche, prefiero quedarme en casa viendo una película. /Hoy no me apetece cocinar, vamos a pedir una pizza." },
+  { word: "pensarse", base: "me lo pensaré", translation: "仔细考虑", context: "当 pensar 加上代词 se (pensarse) 时，表示“深思熟虑、在心里反复盘算”。口语中常带中性代词 lo，表示“仔细考虑(这件事情)”。", example: "Es una oferta de trabajo muy interesante, pero me lo tengo que pensar antes de decidir. " },
+  { word: "de una vez", base: "de una vez", translation: "赶紧 / 终于 / 一次性地", context: "表示“别磨蹭/拖拉了，赶紧干完吧”，或者表示“彻底地”。", example: "¡Termina los deberes de una vez para que podamos ir al parque! (赶紧把作业做完，这样咱们就能去公园了！)" }
+];
+
+// =========================================================================
+// 2. 动词时态练习题库：过去时态 36 题 + 现在时虚拟式 33 题
+// =========================================================================
+const pastTenseQuestions = [
+  { id: 1, cat: "基础综合", before: "Ayer por la tarde yo", after: "a Carlos a hacer sus deberes.", hint: "ayudar", answers: ["ayudé"], cn: "昨天下午我帮卡洛斯做了他的作业。", exp: "ayudar (yo) → ayudé" },
+  { id: 2, cat: "基础综合", before: "Hace dos días ellos", after: "un café abierto cerca de casa.", hint: "encontrar", answers: ["encontraron"], cn: "两天前他们在家附近找到了一家营业的咖啡馆。", exp: "encontrar (ellos) → encontraron" },
+  { id: 3, cat: "基础综合", before: "El mes pasado María", after: "trabajo en otra ciudad.", hint: "buscar", answers: ["buscó"], cn: "上个月玛丽亚在另一座城市找了工作。", exp: "buscar (ella) → buscó（注意 yo 为 busqué）" },
+  { id: 4, cat: "基础综合", before: "El lunes pasado nosotros", after: "la reunión a las nueve en punto.", hint: "empezar", answers: ["empezamos"], cn: "上周一我们九点整开始了会议。", exp: "empezar (nosotros) → empezamos（注意 yo 为 empecé）" },
+  { id: 5, cat: "基础综合", before: "Cuando tenía diez años, mi abuelo me", after: "muchas historias interesantes.", hint: "contar", answers: ["contaba"], altNotes: { "contó": "Cuando tenía diez años 描绘童年背景下的习惯性重复动作，标准答案用过去未完成时 contaba（若强调总括过去讲过许多故事的完整事实，填 contó 也可理解）。" }, cn: "我十岁的时候，爷爷常给我讲很多有趣的故事。", exp: "童年时期的重复习惯动作使用过去未完成时：contar (él) → contaba" },
+  { id: 6, cat: "基础综合", before: "Entre 2015 y 2017 ella", after: "en Madrid.", hint: "vivir", answers: ["vivió"], cn: "2015年到2017年间她住在马德里。", exp: "已结束的封闭时间段用简单过去时：vivir (ella) → vivió" },
+  { id: 7, cat: "tener / saber / poder", before: "El año pasado nosotros", after: "un coche nuevo.", hint: "tener", answers: ["tuvimos"], cn: "去年我们有了一辆新车。", exp: "tener 词根变为 tuv-：nosotros tuvimos" },
+  { id: 8, cat: "基础综合", before: "Anoche ellos", after: "de la fiesta muy tarde.", hint: "irse", answers: ["se fueron"], cn: "昨晚他们很晚才离开派对。", exp: "irse (ellos) → se fueron" },
+  { id: 9, cat: "基础综合", before: "La película que vi la semana pasada", after: "muy divertida.", hint: "ser", answers: ["fue"], cn: "我上周看的那部电影非常有趣。", exp: "ser (ella) → fue（单音节无重音符号）" },
+  { id: 10, cat: "基础综合", before: "Yo", after: "la noticia por la radio hace dos días.", hint: "enterarse de", answers: ["me enteré de"], cn: "我两天前通过广播得知了这个消息。", exp: "enterarse de (yo) → me enteré de（代词 me 与介词 de 不可省略）" },
+  { id: 11, cat: "基础综合", before: "El viernes pasado Juan me", after: "a su mejor amigo.", hint: "presentar", answers: ["presentó"], cn: "上周五胡安把他最好的朋友介绍给了我。", exp: "presentar (él) → presentó" },
+  { id: 12, cat: "基础综合", before: "Hace una semana ella me", after: "un regalo por mi cumpleaños.", hint: "dar", answers: ["dio"], cn: "一周前她因为我过生日送了我一份礼物。", exp: "dar (ella) → dio（单音节无重音符号）" },
+  { id: 13, cat: "基础综合", before: "Ayer nosotros", after: "mucho en la clase de historia.", hint: "aprender", answers: ["aprendimos"], cn: "昨天我们在历史课上学到了很多。", exp: "aprender (nosotros) → aprendimos" },
+  { id: 14, cat: "tener / saber / poder", before: "Anoche yo", after: "la verdad por casualidad.", hint: "saber", answers: ["supe"], cn: "昨晚我偶然知道了真相。", exp: "saber 词根变为 sup-：yo supe" },
+  { id: 15, cat: "tener / saber / poder", before: "Ayer nadie", after: "responder a la última pregunta.", hint: "saber", answers: ["supo"], cn: "昨天没人答得出最后一道题。", exp: "saber (nadie / él) → supo" },
+  { id: 16, cat: "tener / saber / poder", before: "¿Cuándo", after: "vosotros la fecha del examen?", hint: "saber", answers: ["supisteis"], cn: "你们什么时候知道考试日期的？", exp: "saber (vosotros) → supisteis" },
+  { id: 17, cat: "tener / saber / poder", before: "Ayer yo", after: "mucho trabajo en la oficina.", hint: "tener", answers: ["tuve"], cn: "昨天我在办公室有很多工作。", exp: "tener (yo) → tuve（无重音符号）" },
+  { id: 18, cat: "tener / saber / poder", before: "El martes pasado Marta", after: "que ir al médico.", hint: "tener", answers: ["tuvo"], cn: "上周二玛尔塔不得不去看医生。", exp: "tener (ella) → tuvo" },
+  { id: 19, cat: "tener / saber / poder", before: "Ayer por la mañana yo no", after: "llegar a tiempo por el tráfico.", hint: "poder", answers: ["pude"], cn: "昨天早上因为堵车我没能准时赶到。", exp: "poder 词根变为 pud-：yo pude" },
+  { id: 20, cat: "tener / saber / poder", before: "Finalmente mis amigos", after: "comprar las entradas.", hint: "poder", answers: ["pudieron"], cn: "最终我的朋友们买到了门票。", exp: "poder (ellos) → pudieron" },
+  { id: 21, cat: "convertir / pedir / dormir", before: "En pocos años aquel pueblo se", after: "en una ciudad moderna.", hint: "convertir", answers: ["convirtió", "se convirtió"], cn: "短短几年间，那个村庄变成了一座现代城市。", exp: "convertir 第三人称单复数发生 e→i 弱化：convirtió" },
+  { id: 22, cat: "convertir / pedir / dormir", before: "Con el frío de anoche, las gotas de agua se", after: "en hielo.", hint: "convertir", answers: ["convirtieron", "se convirtieron"], cn: "由于昨晚的寒冷，水滴变成了冰。", exp: "convertir (ellas) e→i → convirtieron" },
+  { id: 23, cat: "convertir / pedir / dormir", before: "Anoche en el restaurante él", after: "paella de marisco.", hint: "pedir", answers: ["pidió"], cn: "昨晚在餐厅他点了海鲜饭。", exp: "pedir 第三人称单数 e→i → pidió" },
+  { id: 24, cat: "convertir / pedir / dormir", before: "Ayer los clientes", after: "la cuenta al camarero.", hint: "pedir", answers: ["pidieron"], cn: "昨天顾客们向服务员要了账单。", exp: "pedir 第三人称复数 e→i → pidieron" },
+  { id: 25, cat: "convertir / pedir / dormir", before: "Ayer yo te", after: "un favor muy sencillo.", hint: "pedir", answers: ["pedí"], cn: "昨天我请你帮了一个很简单的忙。", exp: "pedir 第一人称单数不发生音变：yo pedí" },
+  { id: 26, cat: "convertir / pedir / dormir", before: "Anoche el niño", after: "diez horas seguidas.", hint: "dormir", answers: ["durmió"], cn: "昨晚孩子连睡了十个小时。", exp: "dormir 第三人称单复数发生 o→u 弱化：durmió / durmieron" },
+  { id: 27, cat: "traducir / conducir", before: "Ayer yo", after: "ese texto del español al chino.", hint: "traducir", answers: ["traduje"], cn: "昨天我把那篇文本从西语翻译成了中文。", exp: "-ducir 动词词根变为 -duj-：yo traduje" },
+  { id: 28, cat: "traducir / conducir", before: "El año pasado ella", after: "dos novelas francesas.", hint: "traducir", answers: ["tradujo"], cn: "去年她翻译了两部法国小说。", exp: "traducir (ella) → tradujo" },
+  { id: 29, cat: "traducir / conducir", before: "Aquellos expertos", after: "todos los documentos oficiales.", hint: "traducir", answers: ["tradujeron"], cn: "那些专家翻译了所有的官方文件。", exp: "词根以 j 结尾时第三人称复数用 -eron（无 i）：tradujeron" },
+  { id: 30, cat: "traducir / conducir", before: "El domingo pasado mi padre", after: "durante cuatro horas.", hint: "conducir", answers: ["condujo"], cn: "上周日我爸爸开了四个小时的车。", exp: "conducir (él) → condujo" },
+  { id: 31, cat: "traducir / conducir", before: "Anoche yo", after: "despacio por la lluvia.", hint: "conducir", answers: ["conduje"], cn: "昨晚因为下雨我开得很慢。", exp: "conducir (yo) → conduje" },
+  { id: 32, cat: "traducir / conducir", before: "En el último viaje nosotros", after: "hasta Valencia.", hint: "conducir", answers: ["condujimos"], cn: "在上次旅行中我们开车到了瓦伦西亚。", exp: "conducir (nosotros) → condujimos" },
+  { id: 33, cat: "其他高频不规则", before: "¿Qué", after: "tú el fin de semana pasado?", hint: "hacer", answers: ["hiciste"], cn: "你上周末做了什么？", exp: "hacer (tú) → hiciste（注意 él/ella 为 hizo）" },
+  { id: 34, cat: "其他高频不规则", before: "Anoche mis primos", after: "a cenar a casa y", hint: "venir / traer", answers: ["vinieron / trajeron"], cn: "", exp: "" }
+];
+
+// 将第 34-36 题拆为清晰独立的单空基础句，确保每题单空流畅输入
+pastTenseQuestions.splice(33, 1,
+  { id: 34, cat: "其他高频不规则", before: "Anoche mis primos", after: "a cenar a nuestra casa.", hint: "venir", answers: ["vinieron"], cn: "昨晚我的表兄妹们来我们家吃晚饭了。", exp: "venir 词根变为 vin-：ellos vinieron" },
+  { id: 35, cat: "其他高频不规则", before: "Ayer yo", after: "las llaves sobre la mesa y estuve en casa toda la tarde.", hint: "poner", answers: ["puse"], cn: "昨天我把钥匙放在桌子上，整个下午都待在家里。", exp: "poner 词根变为 pus-：yo puse" },
+  { id: 36, cat: "其他高频不规则", before: "El lunes pasado ellos nos", after: "la verdad después de leer el informe.", hint: "decir", answers: ["dijeron"], cn: "上周一他们读完报告后告诉了我们真相。", exp: "decir 词根变为 dij-，第三人称复数无 i：dijeron（traer 同理为 trajeron，leer 第三人称变为 leyó/leyeron）" }
+);
+
+const subjunctiveQuestions = [
+  // 愿望
+  { id: 1, cat: "愿望", before: "Espero que", after: "muy bien.", hint: "estar", answers: ["estés", "estéis", "esté"], cn: "希望你一切都好。", exp: "esperar que + 虚拟式：estar → estés（若指您/你们，填 esté / estéis 亦正确）" },
+  { id: 2, cat: "愿望", before: "Espero que", after: "un buen viaje.", hint: "tener", answers: ["tengas", "tengáis", "tenga"], cn: "希望你旅途愉快。", exp: "tener → tengas（兼容 usted tenga / vosotros tengáis）" },
+  { id: 3, cat: "愿望", before: "Deseo que", after: "de tu estancia.", hint: "disfrutar", answers: ["disfrutes"], cn: "我祝愿你逗留/居住愉快。", exp: "句中有物主形容词 tu，确定主语为 tú：disfrutar → disfrutes" },
+  { id: 4, cat: "愿望", before: "¡Que lo", after: "muy bien!", hint: "pasar", answers: ["pases", "paséis", "pase"], cn: "祝你玩得开心！（独立愿望句式）", exp: "独立祝愿句 ¡Que + 虚拟式!：pasar → pases（兼容 paséis / pase）" },
+  { id: 5, cat: "愿望", before: "¡Ojalá mañana no", after: "durante nuestra excursión!", hint: "llover", answers: ["llueva"], cn: "但愿明天我们郊游时不要下雨！", exp: "ojalá 必接虚拟式，llover (o→ue) → llueva" },
+  { id: 6, cat: "愿望", before: "Mis padres esperan que yo", after: "un buen trabajo pronto.", hint: "conseguir", answers: ["consiga"], cn: "我父母希望我很快找到一份好工作。", exp: "conseguir (yo consigo) →虚拟式词根 consig- → yo consiga" },
+
+  // 建议
+  { id: 7, cat: "建议", before: "Te aconsejo que", after: "bien la puerta al salir.", hint: "cerrar", answers: ["cierres"], cn: "我建议你出门时把门关好。", exp: "由 Te 可知从句主语为 tú，cerrar (e→ie) → cierres" },
+  { id: 8, cat: "建议", before: "Te recomiendo que", after: "el metro o el autobús.", hint: "tomar", answers: ["tomes"], cn: "我推荐你坐地铁或公交车。", exp: "recomendar que + 虚拟式：tomar (tú) → tomes" },
+  { id: 9, cat: "建议", before: "El médico me recomienda que", after: "al menos ocho horas al día.", hint: "dormir", answers: ["duerma"], cn: "医生建议我每天至少睡八个小时。", exp: "由 me 可知从句主语为 yo，dormir (o→ue) → duerma" },
+  { id: 10, cat: "建议", before: "Os aconsejo que", after: "los billetes con antelación.", hint: "comprar", answers: ["compréis"], cn: "我建议你们提前买票。", exp: "由 Os 可知从句主语为 vosotros：comprar → compréis" },
+
+  // 意愿与偏好
+  { id: 11, cat: "意愿与偏好", before: "Quiero que te", after: "como en tu propia casa.", hint: "sentirse", answers: ["sientas", "te sientas"], cn: "我想让你感觉像在自己家一样。", exp: "句中已有 te，sentir (e→ie) → sientas" },
+  { id: 12, cat: "意愿与偏好", before: "No quiero que te", after: "por la limpieza final.", hint: "preocuparse", answers: ["preocupes", "te preocupes"], cn: "我不想让你为最后的打扫卫生而担心。", exp: "preocupar (tú) → preocupes" },
+  { id: 13, cat: "意愿与偏好", before: "Prefiero que", after: "en el garaje.", hint: "aparcar", answers: ["aparques", "aparquéis", "aparque"], cn: "我更希望你把车停在车库里。", exp: "-car 动词发生 c→qu 正字法变化：aparques（兼容 aparquéis / aparque）" },
+  { id: 14, cat: "意愿与偏好", before: "Queremos que nuestros hijos", after: "idiomas extranjeros.", hint: "aprender", answers: ["aprendan"], cn: "我们希望我们的孩子学习外语。", exp: "nuestros hijos (ellos) → aprendan" },
+
+  // 请求
+  { id: 15, cat: "请求", before: "Te pido que no", after: "mucho ruido por la noche.", hint: "hacer", answers: ["hagas", "hagáis"], cn: "我请求你晚上不要发出太大噪音。", exp: "由 Te 可知主语为 tú，hacer (hago) → hagas" },
+  { id: 16, cat: "请求", before: "Te ruego que", after: "las plantas.", hint: "cuidar", answers: ["cuides", "cuidéis"], cn: "我拜托你照料好那些植物。", exp: "rogar que + 虚拟式：cuidar (tú) → cuides" },
+  { id: 17, cat: "请求", before: "El jefe nos pide que", after: "el informe antes del viernes.", hint: "entregar", answers: ["entreguemos"], cn: "老板要求我们在周五前提交报告。", exp: "由 nos 可知主语为 nosotros，-gar 发生 g→gu 变化：entreguemos" },
+  { id: 18, cat: "请求", before: "Le pido a usted que me", after: "un correo electrónico con los datos.", hint: "enviar", answers: ["envíe"], cn: "我请求您给我发一封包含数据的电子邮件。", exp: "enviar 在虚拟式单数与第三人称复数重音落在 i 上：usted envíe" },
+  { id: 19, cat: "请求", before: "Les rogamos a los pasajeros que", after: "en sus asientos.", hint: "permanecer", answers: ["permanezcan"], cn: "我们恳请乘客们留在自己的座位上。", exp: "permanecer (yo permanezco) → ellos permanezcan" },
+
+  // 允许与禁止
+  { id: 20, cat: "允许与禁止", before: "Mis padres no me dejan que", after: "hasta tarde entre semana.", hint: "salir", answers: ["salga"], cn: "我父母不允许我在工作日外出到很晚。", exp: "dejar que 表允许；由 me 可知从句主语为 yo，salir → salga" },
+  { id: 21, cat: "允许与禁止", before: "¿Me permites que", after: "la ventana un momento?", hint: "abrir", answers: ["abra"], cn: "你允许我开一会儿窗户吗？", exp: "permitir que 表允许；从句主语为 yo，abrir → abra" },
+  { id: 22, cat: "允许与禁止", before: "El profesor nos permite que", after: "el diccionario en esta actividad.", hint: "usar", answers: ["usemos"], cn: "老师允许我们在这项活动中使用词典。", exp: "nos permite que → 主语 nosotros：usemos" },
+  { id: 23, cat: "允许与禁止", before: "El médico le prohíbe a mi abuelo que", after: "café por la noche.", hint: "beber", answers: ["beba"], cn: "医生禁止我爷爷晚上喝咖啡。", exp: "prohibir que 表禁止；mi abuelo (él) → beba" },
+  { id: 24, cat: "允许与禁止", before: "En este museo nos prohíben que", after: "fotos con flash.", hint: "sacar", answers: ["saquemos"], cn: "在这座博物馆里禁止我们开闪光灯拍照。", exp: "sacar 发生 c→qu 正字法变化，nosotros → saquemos" },
+  { id: 25, cat: "允许与禁止", before: "La ley prohíbe que los conductores", after: "el móvil mientras conducen.", hint: "utilizar", answers: ["utilicen"], cn: "法律禁止司机在开车时使用手机。", exp: "-zar 动词发生 z→c 正字法变化，los conductores → utilicen" },
+
+  // 情感与喜好
+  { id: 26, cat: "情感与喜好", before: "Me gusta mucho que tú me", after: "siempre la verdad.", hint: "decir", answers: ["digas"], cn: "我很喜欢你总是跟我说实话。", exp: "gustar que + 虚拟式：decir (yo digo) → tú digas" },
+  { id: 27, cat: "情感与喜好", before: "A mis padres les encanta que toda la familia", after: "junta los domingos.", hint: "comer", answers: ["coma"], cn: "我父母非常喜欢全家人周日在一起吃饭。", exp: "encantar que + 虚拟式；toda la familia 为第三人称单数 → coma" },
+  { id: 28, cat: "情感与喜好", before: "Me molesta mucho que la gente", after: "en voz alta en el cine.", hint: "hablar", answers: ["hable"], cn: "人们在电影院里大声说话让我很反感。", exp: "molestar que + 虚拟式；la gente 为第三人称单数 → hable" },
+  { id: 29, cat: "情感与喜好", before: "Me hace mucha ilusión que", after: "a visitarme este verano.", hint: "tú, venir", answers: ["vengas"], cn: "你今年夏天能来看我，这让我非常开心和期待。", exp: "hacer ilusión que + 虚拟式；venir (vengo) → tú vengas" },
+  { id: 30, cat: "情感与喜好", before: "Nos hace mucha ilusión que vosotros", after: "nuestra nueva casa.", hint: "conocer", answers: ["conozcáis"], cn: "你们能来参观我们的新家，我们感到十分期待。", exp: "conocer (conozco) → vosotros conozcáis" },
+  { id: 31, cat: "情感与喜好", before: "Me alegra muchísimo que tu hermana", after: "tan feliz en su nuevo trabajo.", hint: "estar", answers: ["esté"], cn: "你姐姐在新工作里这么开心，这让我非常高兴。", exp: "alegrar（使某人高兴，用法同 gustar）直接加 que + 虚拟式（不加 de）：tu hermana → esté" },
+  { id: 32, cat: "情感与喜好", before: "Me alegro mucho de que tú", after: "participar en el proyecto con nosotros.", hint: "poder", answers: ["puedas"], cn: "我非常高兴你能和我们一起参与这个项目。", exp: "代词式动词 alegrarse de 后接从句必须保留 de（alegrarse de que + 虚拟式）：poder (o→ue) → puedas" },
+  { id: 33, cat: "情感与喜好", before: "Nos alegramos de que vosotros", after: "aprobado el examen DELE B1.", hint: "haber", answers: ["hayáis"], cn: "我们真为你们通过了 DELE B1 考试感到高兴！", exp: "alegrarse de que + 现在完成时虚拟式：haber (vosotros) → hayáis" }
+];
+
+// =========================================================================
+// 3. 全局状态与工具函数
+// =========================================================================
+let currentIndex = 0;
+let cardOrder = [];
+
+// 动词模块状态
+let currentVerbModule = 'past'; // 'past' | 'subj'
+let currentVerbCategory = 'ALL';
+let lastFocusedInput = null;
+
+// 记录每道题用户的输入与批改状态: key = `${module}_${id}`, value = { val: '', status: 'unanswered' | 'correct' | 'wrong' | 'revealed' }
+const verbUserState = {};
+
+// 去除西语重音符号并转小写（用于无重音模糊搜索，如 camion -> camión）
+function stripAccents(str) {
+  if (!str) return '';
+  return str
+    .replace(/<[^>]*>/g, ' ') // 过滤 <br> 等 HTML 标签，防止搜索 "br" 误匹配
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase();
+}
+
+// HTML 转义辅助（安全回显用户输入）
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+// =========================================================================
+// 4. 初始化与顶部 Tab 切换
+// =========================================================================
+function init() {
+  renderTable();
+  setMode('sequential');
+  document.getElementById('totalCards').innerText = vocabularyDB.length;
+  switchVerbModule('past');
+  updateClozeCounter();
+}
+
+function switchTab(tabId, btnEl) {
+  document.querySelectorAll('.section-content').forEach(sec => sec.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  if (btnEl) btnEl.classList.add('active');
+}
+
+// =========================================================================
+// 5. 词汇表渲染与实时搜索功能（保留原始序号 + 手机端序号徽章）
+// =========================================================================
+function handleVocabSearch() {
+  const input = document.getElementById('vocabSearchInput');
+  const clearBtn = document.getElementById('vocabClearBtn');
+  const query = input.value.trim();
+  clearBtn.style.display = query.length > 0 ? 'inline-flex' : 'none';
+  renderTable(query);
+}
+
+function clearVocabSearch() {
+  const input = document.getElementById('vocabSearchInput');
+  input.value = '';
+  document.getElementById('vocabClearBtn').style.display = 'none';
+  renderTable('');
+  input.focus();
+}
+
+function renderTable(query = '') {
+  const container = document.getElementById('table-container');
+  const badge = document.getElementById('vocabCountBadge');
+  const normQuery = stripAccents(query);
+
+  // 过滤并保留每条词汇在原数组中的真实序号 origIndex
+  const filtered = vocabularyDB
+    .map((item, origIndex) => ({ item, origIndex }))
+    .filter(({ item }) => {
+      if (!normQuery) return true;
+      const haystack = stripAccents(
+        `${item.word} ${item.base} ${item.translation} ${item.context} ${item.example}`
+      );
+      return haystack.includes(normQuery);
+    });
+
+  badge.textContent = `显示 ${filtered.length} / ${vocabularyDB.length} 条词汇`;
+
+  if (filtered.length === 0) {
+    container.innerHTML = `
+      <div class="empty-search-box">
+        <div style="font-size: 2.2rem; margin-bottom: 8px;">🔍</div>
+        <div style="font-weight: 800; color: #e65100; font-size: 1.15rem; margin-bottom: 6px;">未找到与“${escapeHtml(query)}”匹配的词汇</div>
+        <div style="font-size: 0.95rem; margin-bottom: 16px;">试试输入简短词根、中文意思或无重音拼写（例如输入 camion 搜索 camión）</div>
+        <button type="button" class="mini-btn check" onclick="clearVocabSearch()">清空搜索词，查看全部词汇</button>
+      </div>
+    `;
+    return;
+  }
+
+  let html = '<table><tbody>';
+  filtered.forEach(({ item, origIndex }) => {
+    const seqNum = origIndex + 1;
+    const baseHtml = item.base ? `<br><span class="base-verb">${item.base}</span>` : '';
+    const contextHtml = item.context ? `<p class="context">${item.context}</p>` : '';
+    const exampleHtml = item.example ? `<p class="example">"${item.example}"</p>` : '';
+
+    html += `
+      <tr>
+        <td class="num-col">${seqNum}.</td>
+        <td class="word-col">
+          <span class="mobile-num-badge">#${seqNum}</span><span>${item.word}</span>${baseHtml}
+        </td>
+        <td class="meaning-col">
+          <strong>${item.translation}</strong>
+          ${contextHtml}
+          ${exampleHtml}
+        </td>
+      </tr>
+    `;
+  });
+  html += '</tbody></table>';
+  container.innerHTML = html;
+}
+
+// =========================================================================
+// 6. 翻卡记忆模块（修复 <br> 渲染问题）
+// =========================================================================
+function setMode(mode) {
+  document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+
+  if (mode === 'random') {
+    document.getElementById('mode-rnd').classList.add('active');
+    cardOrder = Array.from({ length: vocabularyDB.length }, (_, i) => i);
+    for (let i = cardOrder.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [cardOrder[i], cardOrder[j]] = [cardOrder[j], cardOrder[i]];
+    }
+  } else {
+    document.getElementById('mode-seq').classList.add('active');
+    cardOrder = Array.from({ length: vocabularyDB.length }, (_, i) => i);
+  }
+
+  currentIndex = 0;
+
+  const card = document.getElementById('flashcardElement');
+  if (card.classList.contains('is-flipped')) {
+    card.classList.remove('is-flipped');
+    setTimeout(() => updateCard(), 300);
+  } else {
+    updateCard();
+  }
+}
+
+function updateCard() {
+  const realIndex = cardOrder[currentIndex];
+  const item = vocabularyDB[realIndex];
+
+  document.getElementById('fc-word').textContent = item.word;
+
+  const baseNote = document.getElementById('fc-base');
+  if (item.base) {
+    baseNote.textContent = item.base;
+    baseNote.style.display = 'inline-block';
+  } else {
+    baseNote.style.display = 'none';
+  }
+
+  document.getElementById('fc-translation').textContent = item.translation;
+
+  // 使用 innerHTML 正确解析条目中的 <br> 换行标签
+  const ctxEl = document.getElementById('fc-context');
+  if (item.context) {
+    ctxEl.innerHTML = item.context.replace(/^(<br\s*\/?>)+/i, '');
+    ctxEl.style.display = 'block';
+  } else {
+    ctxEl.innerHTML = '';
+    ctxEl.style.display = 'none';
+  }
+
+  const exEl = document.getElementById('fc-example');
+  if (item.example) {
+    exEl.innerHTML = `"${item.example}"`;
+    exEl.style.display = 'block';
+  } else {
+    exEl.innerHTML = '';
+    exEl.style.display = 'none';
+  }
+
+  document.getElementById('cardCount').textContent = currentIndex + 1;
+  document.getElementById('flashcardElement').classList.remove('is-flipped');
+}
+
+function flipCard(event) {
+  if (event) event.preventDefault();
+  document.getElementById('flashcardElement').classList.toggle('is-flipped');
+}
+
+function nextCard(event) {
+  if (event) { event.preventDefault(); event.stopPropagation(); }
+  const card = document.getElementById('flashcardElement');
+  if (card.classList.contains('is-flipped')) {
+    card.classList.remove('is-flipped');
+    setTimeout(() => {
+      currentIndex = (currentIndex + 1) % vocabularyDB.length;
+      updateCard();
+    }, 300);
+  } else {
+    currentIndex = (currentIndex + 1) % vocabularyDB.length;
+    updateCard();
+  }
+}
+
+function prevCard(event) {
+  if (event) { event.preventDefault(); event.stopPropagation(); }
+  const card = document.getElementById('flashcardElement');
+  if (card.classList.contains('is-flipped')) {
+    card.classList.remove('is-flipped');
+    setTimeout(() => {
+      currentIndex = (currentIndex - 1 + vocabularyDB.length) % vocabularyDB.length;
+      updateCard();
+    }, 300);
+  } else {
+    currentIndex = (currentIndex - 1 + vocabularyDB.length) % vocabularyDB.length;
+    updateCard();
+  }
+}
+
+// =========================================================================
+// 7. 动词时态练习核心逻辑（过去时态 + 虚拟式）
+// =========================================================================
+function getActiveDataset() {
+  return currentVerbModule === 'past' ? pastTenseQuestions : subjunctiveQuestions;
+}
+
+function switchVerbModule(mod) {
+  currentVerbModule = mod;
+  currentVerbCategory = 'ALL';
+  lastFocusedInput = null;
+
+  document.getElementById('subtab-past').classList.toggle('active', mod === 'past');
+  document.getElementById('subtab-subj').classList.toggle('active', mod === 'subj');
+
+  renderVerbCategoryPills();
+  renderVerbQuestions();
+}
+
+function renderVerbCategoryPills() {
+  const dataset = getActiveDataset();
+  const categories = ['ALL', ...new Set(dataset.map(q => q.cat))];
+  const container = document.getElementById('verbCategoryPills');
+
+  container.innerHTML = categories.map(cat => {
+    const count = cat === 'ALL' ? dataset.length : dataset.filter(q => q.cat === cat).length;
+    const label = cat === 'ALL' ? `全部 (${count})` : `${cat} (${count})`;
+    const activeCls = currentVerbCategory === cat ? 'active' : '';
+    return `<button type="button" class="cat-pill ${activeCls}" onclick="selectVerbCategory('${cat}')">${label}</button>`;
+  }).join('');
+}
+
+function selectVerbCategory(cat) {
+  currentVerbCategory = cat;
+  lastFocusedInput = null;
+  renderVerbCategoryPills();
+  renderVerbQuestions();
+}
+
+function getFilteredQuestions() {
+  const dataset = getActiveDataset();
+  if (currentVerbCategory === 'ALL') return dataset;
+  return dataset.filter(q => q.cat === currentVerbCategory);
+}
+
+function getStateKey(qId) {
+  return `${currentVerbModule}_${qId}`;
+}
+
+function renderVerbQuestions() {
+  const questions = getFilteredQuestions();
+  const container = document.getElementById('verbQuestionsContainer');
+
+  container.innerHTML = questions.map(q => {
+    const key = getStateKey(q.id);
+    const st = verbUserState[key] || { val: '', status: 'unanswered' };
+
+    let cardStatusClass = '';
+    let inputStatusClass = '';
+    if (st.status === 'correct') { cardStatusClass = 'is-correct'; inputStatusClass = 'input-ok'; }
+    else if (st.status === 'wrong') { cardStatusClass = 'is-wrong'; inputStatusClass = 'input-err'; }
+    else if (st.status === 'revealed') { cardStatusClass = 'is-revealed'; }
+
+    const feedbackHtml = buildFeedbackHtml(q, st);
+
+    return `
+      <div class="verb-q-card ${cardStatusClass}" id="qcard-${key}">
+        <div class="verb-q-header">
+          <span class="verb-q-num">第 ${q.id} 题</span>
+          <span class="verb-q-cat">${q.cat}</span>
+        </div>
+        <div class="verb-sentence">
+          ${q.before ? q.before + ' ' : ''}<input
+            type="text"
+            id="qinput-${key}"
+            class="verb-inline-input ${inputStatusClass}"
+            value="${escapeHtml(st.val)}"
+            placeholder="填写变位..."
+            autocomplete="off"
+            autocapitalize="off"
+            spellcheck="false"
+            onfocus="setFocusedInput(this)"
+            oninput="handleVerbInput('${key}', this.value)"
+            onkeydown="handleVerbKeydown(event, ${q.id})"
+          /> ${q.after}
+          <span class="verb-hint-badge">(${q.hint})</span>
+        </div>
+        <div class="verb-cn-trans">中文句意：${q.cn}</div>
+        <div class="verb-q-footer">
+          <button type="button" class="mini-btn check" onclick="checkSingleVerb(${q.id})">核对</button>
+          <button type="button" class="mini-btn" onclick="revealSingleVerb(${q.id})">点击直接看答案</button>
+        </div>
+        <div id="qfb-${key}" class="verb-feedback ${feedbackHtml.cls}">
+          ${feedbackHtml.content}
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  updateVerbStats();
+}
+
+function setFocusedInput(el) {
+  lastFocusedInput = el;
+}
+
+// 快捷重音符号按钮：精准插入光标位置并保持输入框焦点
+function insertAccent(event, char) {
+  event.preventDefault();
+  if (!lastFocusedInput || !document.body.contains(lastFocusedInput)) {
+    const firstInput = document.querySelector('#verbQuestionsContainer .verb-inline-input');
+    if (!firstInput) return;
+    lastFocusedInput = firstInput;
+  }
+
+  const input = lastFocusedInput;
+  const start = input.selectionStart ?? input.value.length;
+  const end = input.selectionEnd ?? input.value.length;
+  const val = input.value;
+
+  input.value = val.slice(0, start) + char + val.slice(end);
+  const nextPos = start + char.length;
+  input.focus();
+  input.setSelectionRange(nextPos, nextPos);
+
+  const key = input.id.replace('qinput-', '');
+  handleVerbInput(key, input.value);
+}
+
+function handleVerbInput(key, val) {
+  if (!verbUserState[key]) {
+    verbUserState[key] = { val, status: 'unanswered' };
+  } else {
+    verbUserState[key].val = val;
+    // 用户重新修改输入时，恢复待判分视觉样式
+    if (verbUserState[key].status !== 'unanswered') {
+      verbUserState[key].status = 'unanswered';
+      const card = document.getElementById(`qcard-${key}`);
+      const inp = document.getElementById(`qinput-${key}`);
+      const fb = document.getElementById(`qfb-${key}`);
+      if (card) card.className = 'verb-q-card';
+      if (inp) inp.className = 'verb-inline-input';
+      if (fb) { fb.className = 'verb-feedback'; fb.innerHTML = ''; }
+      updateVerbStats();
+    }
+  }
+}
+
+function handleVerbKeydown(event, qId) {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    checkSingleVerb(qId);
+  }
+}
+
+function normalizeAnswer(str) {
+  return String(str || '').trim().replace(/\s+/g, ' ').toLowerCase();
+}
+
+function buildFeedbackHtml(q, st) {
+  if (!st || st.status === 'unanswered') {
+    return { cls: '', content: '' };
+  }
+
+  const allAnswersText = q.answers.join(' / ');
+
+  if (st.status === 'correct') {
+    const extraNote = q.answers.length > 1 ? `（可接受答案：<strong>${allAnswersText}</strong>）` : '';
+    return {
+      cls: 'show fb-ok',
+      content: `<strong>✓ 回答正确！</strong> 标准变位：<strong>${q.answers[0]}</strong> ${extraNote}<br><span>📖 语法解析：${q.exp}</span>`
+    };
+  }
+
+  if (st.status === 'wrong') {
+    const userClean = normalizeAnswer(st.val);
+    const altExplanation = (q.altNotes && q.altNotes[userClean]) ? `<br><span>💡 ${q.altNotes[userClean]}</span>` : '';
+    const accentMissed = !altExplanation && userClean && q.answers.some(ans => stripAccents(ans) === stripAccents(userClean));
+    const accentTip = accentMissed ? `<br><span>⚠️ 字母拼写正确，注意检查<strong>西语重音符号</strong>！</span>` : '';
+    const userDisplay = st.val.trim() ? `（你的输入：<em>${escapeHtml(st.val.trim())}</em>）` : '（未填写）';
+
+    return {
+      cls: 'show fb-err',
+      content: `<strong>✗ 正确答案：${allAnswersText}</strong> ${userDisplay}${altExplanation}${accentTip}<br><span>📖 ${q.exp}</span>`
+    };
+  }
+
+  if (st.status === 'revealed') {
+    return {
+      cls: 'show fb-reveal',
+      content: `<strong>👀 答案：${allAnswersText}</strong><br><span>📖 ${q.exp}</span>`
+    };
+  }
+
+  return { cls: '', content: '' };
+}
+
+function refreshSingleQuestionUI(q) {
+  const key = getStateKey(q.id);
+  const st = verbUserState[key] || { val: '', status: 'unanswered' };
+  const card = document.getElementById(`qcard-${key}`);
+  const inp = document.getElementById(`qinput-${key}`);
+  const fb = document.getElementById(`qfb-${key}`);
+
+  if (!card || !inp || !fb) return;
+
+  inp.value = st.val;
+  card.className = 'verb-q-card ' + (
+    st.status === 'correct' ? 'is-correct' :
+    st.status === 'wrong' ? 'is-wrong' :
+    st.status === 'revealed' ? 'is-revealed' : ''
+  );
+  inp.className = 'verb-inline-input ' + (
+    st.status === 'correct' ? 'input-ok' :
+    st.status === 'wrong' ? 'input-err' : ''
+  );
+
+  const feedbackObj = buildFeedbackHtml(q, st);
+  fb.className = `verb-feedback ${feedbackObj.cls}`;
+  fb.innerHTML = feedbackObj.content;
+}
+
+function checkSingleVerb(qId) {
+  const dataset = getActiveDataset();
+  const q = dataset.find(item => item.id === qId);
+  if (!q) return;
+
+  const key = getStateKey(q.id);
+  const inp = document.getElementById(`qinput-${key}`);
+  const rawVal = inp ? inp.value : (verbUserState[key]?.val || '');
+  const normUser = normalizeAnswer(rawVal);
+
+  const isCorrect = normUser.length > 0 && q.answers.some(ans => normalizeAnswer(ans) === normUser);
+
+  verbUserState[key] = {
+    val: rawVal,
+    status: isCorrect ? 'correct' : 'wrong'
+  };
+
+  refreshSingleQuestionUI(q);
+  updateVerbStats();
+}
+
+function revealSingleVerb(qId) {
+  const dataset = getActiveDataset();
+  const q = dataset.find(item => item.id === qId);
+  if (!q) return;
+
+  const key = getStateKey(q.id);
+  verbUserState[key] = {
+    val: q.answers[0],
+    status: 'revealed'
+  };
+
+  refreshSingleQuestionUI(q);
+  updateVerbStats();
+}
+
+function checkAllVerbs() {
+  const questions = getFilteredQuestions();
+  questions.forEach(q => {
+    const key = getStateKey(q.id);
+    if (verbUserState[key]?.status === 'revealed') return;
+    checkSingleVerb(q.id);
+  });
+}
+
+function revealAllVerbs() {
+  const questions = getFilteredQuestions();
+  questions.forEach(q => {
+    const key = getStateKey(q.id);
+    if (verbUserState[key]?.status === 'correct') return;
+    verbUserState[key] = {
+      val: q.answers[0],
+      status: 'revealed'
+    };
+    refreshSingleQuestionUI(q);
+  });
+  updateVerbStats();
+}
+
+function resetCurrentVerbs() {
+  const questions = getFilteredQuestions();
+  questions.forEach(q => {
+    const key = getStateKey(q.id);
+    delete verbUserState[key];
+  });
+  renderVerbQuestions();
+}
+
+function updateVerbStats() {
+  const questions = getFilteredQuestions();
+  let gradedCount = 0;
+  let correctCount = 0;
+  let revealedCount = 0;
+
+  questions.forEach(q => {
+    const st = verbUserState[getStateKey(q.id)];
+    if (!st) return;
+    if (st.status === 'correct') {
+      gradedCount++;
+      correctCount++;
+    } else if (st.status === 'wrong') {
+      gradedCount++;
+    } else if (st.status === 'revealed') {
+      revealedCount++;
+    }
+  });
+
+  const doneTotal = gradedCount + revealedCount;
+  document.getElementById('verbProgressStat').textContent = `已完成 ${doneTotal} / ${questions.length}`;
+
+  const accEl = document.getElementById('verbAccuracyStat');
+  if (gradedCount === 0) {
+    accEl.textContent = `正确率：--`;
+  } else {
+    const pct = Math.round((correctCount / gradedCount) * 100);
+    accEl.textContent = `正确率：${pct}% (${correctCount}/${gradedCount})`;
+  }
+}
+
+// =========================================================================
+// 8. 听力填空交互逻辑
+// =========================================================================
+function toggleBlank(el) {
+  el.classList.toggle('revealed');
+  updateClozeCounter();
+}
+
+function setAllCloze(reveal) {
+  document.querySelectorAll('#clozeContainer .blank-word').forEach(el => {
+    el.classList.toggle('revealed', reveal);
+  });
+  updateClozeCounter();
+}
+
+function updateClozeCounter() {
+  const allBlanks = document.querySelectorAll('#clozeContainer .blank-word');
+  const revealedBlanks = document.querySelectorAll('#clozeContainer .blank-word.revealed');
+  document.getElementById('clozeTotalCount').textContent = allBlanks.length;
+  document.getElementById('clozeRevealedCount').textContent = revealedBlanks.length;
+}
+
+window.onload = init;
+</script>
+</body>
+</html>
